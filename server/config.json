@@ -1,0 +1,15 @@
+{
+  "_comment": "QueueCue host config. Change the model here (single value). 8 GB RAM: qwen3:8b, 16 GB: qwen3:14b, 24 GB+: gpt-oss:20b.",
+  "model": "qwen3:14b",
+  "ollama_url": "http://127.0.0.1:11434",
+  "port": 8080,
+  "whisper_bin": "whisper-cli",
+  "whisper_model": "../tools/whisper/ggml-small.en.bin",
+  "web_root": "../app/build/web",
+  "db_path": "data/queuecue.db",
+  "uploads_dir": "data/uploads",
+  "organizer_key": "org-demo-key",
+  "demo_mode": true,
+  "ai_live": false,
+  "recruiter_signup_code": "TROJANCAREERFAIR"
+}

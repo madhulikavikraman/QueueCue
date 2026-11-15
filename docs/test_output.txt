@@ -1,0 +1,27 @@
+$ dart test
+  ✓ Invariance: identity, arrival time, points and level never change the order random changes to name, arrival time of day, points, level and grad year
+  ✓ Sections every verified-conversation student appears above every non-verified student
+  ✓ Sections line credit ("Waited for you") sits above remote resumes, below verified
+  ✓ Sections a highly qualified remote candidate is flagged as a strong unmet match
+  ✓ Effort cap changing only wait minutes changes order only within the effort cap
+  ✓ Effort cap waiting 500 minutes counts the same as waiting the cap (60)
+  ✓ Effort cap waiting can lift a student past someone slightly more qualified, never far more
+  ✓ Lottery ties are broken by SHA-256 of the committed seed, reproducibly
+  ✓ Lottery a different seed gives a different tie order (seed matters, is not ignored)
+  ✓ Wait estimate is a range, never a single number
+  ✓ Wait estimate rolling average ignores outliers and falls back to the default
+  ✓ 1. Plan: "US citizens only" booth flagged; AI/ML resume chosen for the AI booth
+  ✓ 2. Join the big tech line: 13 ahead, "~35 to 45 min", pitch brief appears
+  ✓ 3. "More like me" on a different student gives a different voice
+  ✓ 4. Drop and go with the Production Eng resume
+  ✓ 5. Recruiter view shows the drop live with a reason; stars are private
+  ✓ 6a. A student cannot verify their own conversation
+  ✓ 6b. An old screenshot of the rotating QR is rejected
+  ✓ 6c. Recruiter scans Phone A: cards swap, A leaves the line, B moves up
+  ✓ 6d. Sanity limits: second confirm within 20 s asks "Group chat?"; one per booth
+  ✓ 7. Rolodex voice note becomes a follow-up email in the student's voice
+  ✓ 8. Close fair: line credit + Fair Play reaches top-3; recap and audit
+  ✓ Every cached pitch passes the deterministic critic
+  ✓ Every number in a cached pitch is traceable to the student materials
+
+00:01 +24: All tests passed!

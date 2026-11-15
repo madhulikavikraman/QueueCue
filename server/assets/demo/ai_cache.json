@@ -1,0 +1,787 @@
+{
+ "version": 1,
+ "model": "hand-written starter cache (regenerate with: dart run bin/build_cache.dart)",
+ "generated_at": "2026-11-14",
+ "entries": {
+  "fit:viktor:northwind": {
+   "fit": 0.88,
+   "fit_a": 0.9,
+   "fit_b": 0.86,
+   "resume_label": "AI/ML",
+   "reason": "Batching that cut p95 latency from 2.1 s to 900 ms maps to the LLM Serving intern role.",
+   "resume_reason": "AI/ML resume leads with inference and retrieval; Backend buries them.",
+   "matched_roles": [
+    "ML Engineer Intern, LLM Serving"
+   ]
+  },
+  "fit:viktor:lumen": {
+   "fit": 0.91,
+   "fit_a": 0.92,
+   "fit_b": 0.9,
+   "resume_label": "AI/ML",
+   "reason": "Retrieval project with a 120-question hand-labeled eval set maps to Retrieval & Evals.",
+   "resume_reason": "AI/ML resume has the retrieval metrics; Backend mentions them in one line.",
+   "matched_roles": [
+    "Applied ML Engineer, Retrieval & Evals",
+    "Founding Backend Engineer"
+   ]
+  },
+  "fit:viktor:halcyon": {
+   "fit": 0.22,
+   "fit_a": 0.23,
+   "fit_b": 0.21,
+   "resume_label": "Backend",
+   "reason": "Flight software roles need C/C++ and RTOS; resume shows Go and Python.",
+   "resume_reason": "Neither resume shows embedded C; Backend is closer on systems work.",
+   "matched_roles": []
+  },
+  "fit:viktor:copperline": {
+   "fit": 0.28,
+   "fit_a": 0.29,
+   "fit_b": 0.27,
+   "resume_label": "Backend",
+   "reason": "Firmware roles need C and microcontrollers; no embedded work on either resume.",
+   "resume_reason": "Backend has more systems work than AI/ML.",
+   "matched_roles": []
+  },
+  "fit:viktor:ridgeway": {
+   "fit": 0.52,
+   "fit_a": 0.53,
+   "fit_b": 0.51,
+   "resume_label": "AI/ML",
+   "reason": "Python and evaluation rigor fit Quant Research, but no time-series or backtesting work.",
+   "resume_reason": "AI/ML resume shows measured evaluation work.",
+   "matched_roles": [
+    "Quantitative Research Intern"
+   ]
+  },
+  "fit:viktor:parcelpilot": {
+   "fit": 0.55,
+   "fit_a": 0.56,
+   "fit_b": 0.54,
+   "resume_label": "Backend",
+   "reason": "Backend and Postgres fit Full-stack, but no TypeScript or React shown.",
+   "resume_reason": "Backend resume leads with services and Postgres.",
+   "matched_roles": [
+    "Full-stack Engineer"
+   ]
+  },
+  "fit:viktor:bayside": {
+   "fit": 0.64,
+   "fit_a": 0.65,
+   "fit_b": 0.63,
+   "resume_label": "Backend",
+   "reason": "Python/Go API and pipeline work fits the Data Platform backend role.",
+   "resume_reason": "Backend resume lists Go, Postgres and APIs.",
+   "matched_roles": [
+    "Backend Engineer, Data Platform"
+   ]
+  },
+  "fit:viktor:orbital": {
+   "fit": 0.48,
+   "fit_a": 0.49,
+   "fit_b": 0.47,
+   "resume_label": "Backend",
+   "reason": "Go services fit Network Software, but no networking or observability work shown.",
+   "resume_reason": "Backend resume leads with Go.",
+   "matched_roles": [
+    "Network Software Engineer"
+   ]
+  },
+  "fit:viktor:kestrel": {
+   "fit": 0.38,
+   "fit_a": 0.39,
+   "fit_b": 0.37,
+   "resume_label": "Backend",
+   "reason": "On-call experience is adjacent to Server Reliability; no game or Unreal work.",
+   "resume_reason": "Backend resume mentions on-call.",
+   "matched_roles": []
+  },
+  "fit:viktor:meridian": {
+   "fit": 0.81,
+   "fit_a": 0.82,
+   "fit_b": 0.8,
+   "resume_label": "Backend",
+   "reason": "Go payment reconciliation at ~2M transactions/day matches the Payments engineer role.",
+   "resume_reason": "Backend resume details reconciliation and idempotency.",
+   "matched_roles": [
+    "Software Engineer, Payments"
+   ]
+  },
+  "fit:viktor:gridwise": {
+   "fit": 0.45,
+   "fit_a": 0.46,
+   "fit_b": 0.44,
+   "resume_label": "AI/ML",
+   "reason": "Python modeling is adjacent to dispatch forecasting; no time-series pipelines.",
+   "resume_reason": "AI/ML resume has the modeling work.",
+   "matched_roles": []
+  },
+  "fit:viktor:stackline": {
+   "fit": 0.72,
+   "fit_a": 0.74,
+   "fit_b": 0.7,
+   "resume_label": "AI/ML",
+   "reason": "Serving a model on one GPU is adjacent to perception model deployment on edge GPUs.",
+   "resume_reason": "AI/ML resume shows GPU inference work.",
+   "matched_roles": [
+    "Robotics Software Engineer, Perception"
+   ]
+  },
+  "fit:hermione:northwind": {
+   "fit": 0.86,
+   "fit_a": 0.87,
+   "fit_b": 0.85,
+   "resume_label": "Production Eng",
+   "reason": "SLO alert rewrite (140 to 53 pages a week) matches Production Engineer, Storage On-call.",
+   "resume_reason": "Production Eng resume leads with SRE results; Embedded leads with avionics.",
+   "matched_roles": [
+    "Production Engineer, Storage On-call"
+   ]
+  },
+  "fit:hermione:lumen": {
+   "fit": 0.33,
+   "fit_a": 0.34,
+   "fit_b": 0.32,
+   "resume_label": "Production Eng",
+   "reason": "Roles need retrieval/ML or backend APIs; resume is reliability and embedded.",
+   "resume_reason": "Production Eng is closer to backend operations.",
+   "matched_roles": []
+  },
+  "fit:hermione:halcyon": {
+   "fit": 0.84,
+   "fit_a": 0.85,
+   "fit_b": 0.83,
+   "resume_label": "Embedded",
+   "reason": "STM32 flight computer with watchdog and telemetry matches Flight Software.",
+   "resume_reason": "Embedded resume details the watchdog fix; Production Eng gives avionics one line.",
+   "matched_roles": [
+    "Embedded Software Engineer, Flight Software",
+    "Systems Test Engineer"
+   ]
+  },
+  "fit:hermione:copperline": {
+   "fit": 0.79,
+   "fit_a": 0.8,
+   "fit_b": 0.78,
+   "resume_label": "Embedded",
+   "reason": "STM32 firmware in C with scope and logic-analyzer skills matches the Firmware Intern role.",
+   "resume_reason": "Embedded resume is firmware-first.",
+   "matched_roles": [
+    "Firmware Engineer Intern"
+   ]
+  },
+  "fit:hermione:ridgeway": {
+   "fit": 0.3,
+   "fit_a": 0.31,
+   "fit_b": 0.29,
+   "resume_label": "Production Eng",
+   "reason": "Quant roles need statistics and modeling; little overlap.",
+   "resume_reason": "Production Eng has the Linux and systems work.",
+   "matched_roles": []
+  },
+  "fit:hermione:parcelpilot": {
+   "fit": 0.36,
+   "fit_a": 0.37,
+   "fit_b": 0.35,
+   "resume_label": "Production Eng",
+   "reason": "Full-stack and analyst roles; resume is reliability and embedded.",
+   "resume_reason": "Production Eng is closer to software operations.",
+   "matched_roles": []
+  },
+  "fit:hermione:bayside": {
+   "fit": 0.34,
+   "fit_a": 0.35,
+   "fit_b": 0.33,
+   "resume_label": "Production Eng",
+   "reason": "Data science and backend roles; little direct overlap.",
+   "resume_reason": "Production Eng is closer to platform work.",
+   "matched_roles": []
+  },
+  "fit:hermione:orbital": {
+   "fit": 0.92,
+   "fit_a": 0.93,
+   "fit_b": 0.91,
+   "resume_label": "Embedded",
+   "reason": "Flight computer with 50 Hz LoRa telemetry and a watchdog matches Embedded Linux on satellites.",
+   "resume_reason": "Embedded resume has the telemetry and watchdog detail.",
+   "matched_roles": [
+    "Embedded Linux Engineer",
+    "Network Software Engineer"
+   ]
+  },
+  "fit:hermione:kestrel": {
+   "fit": 0.69,
+   "fit_a": 0.7,
+   "fit_b": 0.68,
+   "resume_label": "Production Eng",
+   "reason": "Alerting rewrite and incident reviews fit Server Reliability Engineer.",
+   "resume_reason": "Production Eng resume has the incident work.",
+   "matched_roles": [
+    "Server Reliability Engineer"
+   ]
+  },
+  "fit:hermione:meridian": {
+   "fit": 0.47,
+   "fit_a": 0.48,
+   "fit_b": 0.46,
+   "resume_label": "Production Eng",
+   "reason": "On-call experience is adjacent to Payments; no Java or payments work.",
+   "resume_reason": "Production Eng shows on-call.",
+   "matched_roles": []
+  },
+  "fit:hermione:gridwise": {
+   "fit": 0.82,
+   "fit_a": 0.83,
+   "fit_b": 0.81,
+   "resume_label": "Embedded",
+   "reason": "Watchdog and field telemetry work matches Controls & Embedded for battery sites.",
+   "resume_reason": "Embedded resume has the watchdog and telemetry detail.",
+   "matched_roles": [
+    "Controls & Embedded Engineer"
+   ]
+  },
+  "fit:hermione:stackline": {
+   "fit": 0.6,
+   "fit_a": 0.61,
+   "fit_b": 0.59,
+   "resume_label": "Embedded",
+   "reason": "Embedded test work is adjacent to Manufacturing Test Engineer.",
+   "resume_reason": "Embedded resume shows hardware debugging.",
+   "matched_roles": [
+    "Manufacturing Test Engineer"
+   ]
+  },
+  "fit:percy:northwind": {
+   "fit": 0.56,
+   "fit_a": 0.57,
+   "fit_b": 0.55,
+   "resume_label": "Quant/Data",
+   "reason": "SQL dashboards and Python fit Data Engineer in part; no Spark or Airflow.",
+   "resume_reason": "Quant/Data resume shows SQL and Python together.",
+   "matched_roles": [
+    "Data Engineer, Billing Analytics"
+   ]
+  },
+  "fit:percy:lumen": {
+   "fit": 0.3,
+   "fit_a": 0.31,
+   "fit_b": 0.29,
+   "resume_label": "Quant/Data",
+   "reason": "Roles need retrieval or backend engineering; resume is analytics and forecasting.",
+   "resume_reason": "Quant/Data has the Python work.",
+   "matched_roles": []
+  },
+  "fit:percy:halcyon": {
+   "fit": 0.08,
+   "fit_a": 0.09,
+   "fit_b": 0.07,
+   "resume_label": "Quant/Data",
+   "reason": "Engineering roles; no overlap with an analytics resume.",
+   "resume_reason": "No overlap on either resume.",
+   "matched_roles": []
+  },
+  "fit:percy:copperline": {
+   "fit": 0.07,
+   "fit_a": 0.08,
+   "fit_b": 0.06,
+   "resume_label": "Quant/Data",
+   "reason": "Hardware roles; no overlap.",
+   "resume_reason": "No overlap on either resume.",
+   "matched_roles": []
+  },
+  "fit:percy:ridgeway": {
+   "fit": 0.86,
+   "fit_a": 0.88,
+   "fit_b": 0.84,
+   "resume_label": "Quant/Data",
+   "reason": "Forecast validated on worst weeks maps to signal validation in Quant Research.",
+   "resume_reason": "Quant/Data resume has the model and validation detail.",
+   "matched_roles": [
+    "Quantitative Research Intern",
+    "Risk Analyst"
+   ]
+  },
+  "fit:percy:parcelpilot": {
+   "fit": 0.85,
+   "fit_a": 0.86,
+   "fit_b": 0.84,
+   "resume_label": "Product Analyst",
+   "reason": "Logistics SQL dashboards for 14 managers match the Operations Data Analyst role.",
+   "resume_reason": "Product Analyst resume leads with stakeholder interviews and dashboards.",
+   "matched_roles": [
+    "Operations Data Analyst"
+   ]
+  },
+  "fit:percy:bayside": {
+   "fit": 0.82,
+   "fit_a": 0.83,
+   "fit_b": 0.81,
+   "resume_label": "Quant/Data",
+   "reason": "Ridership forecasting (MAPE 18% to 11%) maps to forecasting patient volume.",
+   "resume_reason": "Quant/Data resume has the forecasting detail.",
+   "matched_roles": [
+    "Data Scientist, Clinical Operations"
+   ]
+  },
+  "fit:percy:orbital": {
+   "fit": 0.1,
+   "fit_a": 0.11,
+   "fit_b": 0.09,
+   "resume_label": "Quant/Data",
+   "reason": "Embedded and networking roles; no overlap.",
+   "resume_reason": "No overlap on either resume.",
+   "matched_roles": []
+  },
+  "fit:percy:kestrel": {
+   "fit": 0.58,
+   "fit_a": 0.59,
+   "fit_b": 0.57,
+   "resume_label": "Product Analyst",
+   "reason": "SQL dashboards fit Live Ops analyst; no experimentation or game data.",
+   "resume_reason": "Product Analyst lists A/B testing.",
+   "matched_roles": [
+    "Live Ops Data Analyst"
+   ]
+  },
+  "fit:percy:meridian": {
+   "fit": 0.83,
+   "fit_a": 0.84,
+   "fit_b": 0.82,
+   "resume_label": "Quant/Data",
+   "reason": "Credit default model (2nd of 31) and SQL fit Data Analyst, Fraud.",
+   "resume_reason": "Quant/Data resume has the credit model.",
+   "matched_roles": [
+    "Data Analyst, Fraud",
+    "Technology Rotation Program"
+   ]
+  },
+  "fit:percy:gridwise": {
+   "fit": 0.45,
+   "fit_a": 0.46,
+   "fit_b": 0.44,
+   "resume_label": "Quant/Data",
+   "reason": "Time-series forecasting is adjacent to dispatch forecasting; major not listed.",
+   "resume_reason": "Quant/Data has the forecasting work.",
+   "matched_roles": [
+    "Data Platform Engineer"
+   ]
+  },
+  "fit:percy:stackline": {
+   "fit": 0.09,
+   "fit_a": 0.1,
+   "fit_b": 0.08,
+   "resume_label": "Quant/Data",
+   "reason": "Robotics roles; no overlap.",
+   "resume_reason": "No overlap on either resume.",
+   "matched_roles": []
+  },
+  "pitch:viktor:northwind:default": {
+   "pitch": "Hey, I'm Viktor, doing my master's in CS. So the thing I keep coming back to is the inference server I ran for our lab. One A10, a 7B model, and latency was bad. I added request batching and p95 went from 2.1 seconds to 900 milliseconds. Your LLM Serving intern role is basically that problem at a much bigger scale, which is the part I want to work on.",
+   "question": "On the serving team, are interns mostly tuning latency on models you already host, or do they get to change how requests are batched and scheduled?",
+   "talking_points": [
+    "Lab server: batching took p95 from 2.1 s to 900 ms",
+    "Also: CourseQA retrieval, hit rate 60% to 85%"
+   ],
+   "project": "Lab inference server",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:northwind:more_like_me": {
+   "pitch": "Okay so, I'm Viktor, master's in CS. Honestly my favorite bug was on our lab's inference server. One A10, a 7B model, and p95 was sitting at 2.1 seconds. Turns out it needed batching. I added request batching and got it to 900 milliseconds. I like breaking stuff to see where it bends, and your LLM Serving intern role sounds like that, every day.",
+   "question": "Okay so on serving: are interns tuning latency on models you already host, or do they get to touch how requests get batched?",
+   "talking_points": [
+    "p95: 2.1 s to 900 ms, one A10, 7B model",
+    "\"I like breaking stuff to see where it bends\""
+   ],
+   "project": "Lab inference server",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:northwind:shorter": {
+   "pitch": "I'm Viktor, master's in CS. I ran our lab's inference server: one A10, a 7B model. I added request batching and p95 went from 2.1 seconds to 900 milliseconds. That's the LLM Serving intern work, so that's the role I'm here about.",
+   "question": "Do serving interns get to change how requests are batched, or mostly tune existing models?",
+   "talking_points": [
+    "Batching: p95 2.1 s to 900 ms",
+    "LLM Serving intern"
+   ],
+   "project": "Lab inference server",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:northwind:different_project": {
+   "pitch": "Hey, I'm Viktor, master's in CS. So I TA a 300-student class and built a Q&A bot over about 400 lecture transcripts. It kept answering week nine questions with week three slides. I rebuilt the chunking around timestamps and hit rate went from 60 to 85 percent on 120 questions I labeled by hand. That's the retrieval half of my LLM work; your LLM Serving intern role is the other half.",
+   "question": "Do serving interns ever work on the retrieval path in front of the model, or is that a separate team?",
+   "talking_points": [
+    "CourseQA: hit rate 60% to 85% on 120 labeled questions",
+    "Bug: week nine questions got week three slides"
+   ],
+   "project": "CourseQA",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:lumen:default": {
+   "pitch": "Hey, I'm Viktor, master's in CS. So I TA a 300-student course and built a Q&A bot over about 400 lecture transcripts. First version kept pulling week three slides for week nine questions. Turns out my chunks were cutting across lectures, so I re-chunked around timestamps and hand-labeled 120 questions. Hit rate went from 60 to 85 percent. That's pretty much your Retrieval & Evals role: chunking, plus an eval set you trust.",
+   "question": "For Retrieval & Evals, do your eval sets come from customers' real questions, or do you write them in-house before a customer has traffic?",
+   "talking_points": [
+    "Chunks cut across lectures; re-chunked on timestamps",
+    "120 hand-labeled questions: 60% to 85%"
+   ],
+   "project": "CourseQA",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:lumen:more_like_me": {
+   "pitch": "Okay so, I'm Viktor. I TA a class and I was answering the same question like forty times a week, so I built a bot over the lecture transcripts. It kept pulling week three slides for week nine questions. Turns out my chunks were cutting across lectures. Re-chunked on timestamps, hand-labeled 120 questions, hit rate went from 60 to 85 percent. Your Retrieval & Evals role is honestly that bug, every day.",
+   "question": "Okay so for Retrieval & Evals: do the eval sets come from real customer questions, or do you write them before there's traffic?",
+   "talking_points": [
+    "Same question forty times a week",
+    "60% to 85% on 120 hand-labeled questions"
+   ],
+   "project": "CourseQA",
+   "resume_label": "AI/ML"
+  },
+  "pitch:viktor:meridian:default": {
+   "pitch": "Hi, I'm Viktor, master's in CS. I interned at Paysetu, a payments startup, on a Go service for reconciliation, around 2 million transactions a day. After a double-count incident I made the reconciliation jobs idempotent, and I joined the on-call rotation. Your Payments engineer role lists reconciliation, idempotency and on-call, so it's the same kind of work, just bigger.",
+   "question": "On Payments, when reconciliation finds a mismatch, does engineering own the fix end to end, or does it go to an operations team first?",
+   "talking_points": [
+    "Go reconciliation, ~2M transactions/day",
+    "Made jobs idempotent after a double-count"
+   ],
+   "project": "Payment reconciliation (Paysetu)",
+   "resume_label": "Backend"
+  },
+  "pitch:viktor:stackline:default": {
+   "pitch": "Hey, I'm Viktor, master's in CS. The closest thing I've done to your perception work is the inference server I ran for our lab: one A10, a 7B model. I added request batching and p95 went from 2.1 seconds to 900 milliseconds. Your Perception role mentions model deployment on edge GPUs, and getting latency down on one GPU is the part I know.",
+   "question": "For perception on the robots, what's the latency budget per frame, and who decides when a model is too slow to ship?",
+   "talking_points": [
+    "One GPU, p95 2.1 s to 900 ms",
+    "Ask about per-frame latency budget"
+   ],
+   "project": "Lab inference server",
+   "resume_label": "AI/ML"
+  },
+  "pitch:hermione:northwind:default": {
+   "pitch": "I'm Hermione, computer engineering. Last summer I was an SRE intern at Trellis Commerce. We were getting 140 pages a week. I rewrote the Prometheus alerts around SLOs and it dropped to 53. I also wrote runbooks for 9 services and led 2 post-incident reviews. Your Production Engineer role is storage on-call. That's the work I want.",
+   "question": "For new production engineers on storage, how many weeks before they carry the pager alone, and what do they own first?",
+   "talking_points": [
+    "Pages: 140 a week to 53 (SLO alerts)",
+    "Runbooks for 9 services; 2 post-incident reviews"
+   ],
+   "project": "SRE internship (Trellis Commerce)",
+   "resume_label": "Production Eng"
+  },
+  "pitch:hermione:northwind:more_like_me": {
+   "pitch": "140 pages a week, down to 53. That was my summer as an SRE intern at Trellis Commerce. I rewrote the alerts around SLOs. I'm Hermione, computer engineering. Before that, rocket team avionics. Our flight computer reset on a brownout during a static fire, so I added a watchdog. Next four tests, zero resets. Your Production Engineer posting is storage on-call. I want the pager.",
+   "question": "How long before a new production engineer carries the storage pager alone?",
+   "talking_points": [
+    "140 to 53 pages a week",
+    "Watchdog: next four tests, zero resets"
+   ],
+   "project": "SRE internship (Trellis Commerce)",
+   "resume_label": "Production Eng"
+  },
+  "pitch:hermione:northwind:shorter": {
+   "pitch": "I'm Hermione, computer engineering. SRE intern at Trellis Commerce: pages went from 140 a week to 53 after I rewrote the alerts around SLOs. Runbooks for 9 services. Your Production Engineer role is storage on-call. That's what I want to do.",
+   "question": "How many weeks before new production engineers carry the storage pager alone?",
+   "talking_points": [
+    "140 to 53 pages a week",
+    "Storage on-call"
+   ],
+   "project": "SRE internship (Trellis Commerce)",
+   "resume_label": "Production Eng"
+  },
+  "pitch:hermione:northwind:different_project": {
+   "pitch": "I'm Hermione, computer engineering. At home I run a 3-node k3s cluster on Raspberry Pis. Every week a chaos test kills a node and I check how long recovery takes. At Trellis Commerce I did it for real: pages went from 140 a week to 53 after I rewrote alerts around SLOs. Your Production Engineer role is storage on-call. That's the work.",
+   "question": "Do you run failure drills on the storage fleet, and do new production engineers help design them?",
+   "talking_points": [
+    "Weekly node-kill chaos test on 3 Pis",
+    "Pages 140 to 53 at Trellis"
+   ],
+   "project": "Homelab",
+   "resume_label": "Production Eng"
+  },
+  "pitch:hermione:orbital:default": {
+   "pitch": "I'm Hermione, computer engineering. I lead avionics on our rocket team. STM32 flight computer, telemetry at 50 Hz over LoRa. During a static fire it reset on a brownout and we lost telemetry. I added a hardware watchdog and brownout detection. Next four tests, zero resets. Your Embedded Linux role covers telemetry and watchdogs on small satellites. Same problems, further away.",
+   "question": "When the watchdog fires in orbit, does it reboot into a safe mode, and how do you test that on the ground?",
+   "talking_points": [
+    "50 Hz telemetry over LoRa",
+    "Brownout reset to watchdog: zero resets in 4 tests"
+   ],
+   "project": "Rocket team avionics",
+   "resume_label": "Embedded"
+  },
+  "pitch:hermione:orbital:more_like_me": {
+   "pitch": "Zero resets in four tests. That's the one. Our rocket's flight computer reset on a brownout during a static fire and we lost about four seconds of telemetry. I added a hardware watchdog and brownout detection. I'm Hermione, computer engineering, avionics lead. STM32, 50 Hz over LoRa. Your Embedded Linux role is telemetry and watchdogs on satellites. I like work where you can measure whether it got better.",
+   "question": "When the watchdog fires in orbit, what does the satellite boot into, and how do you test it on the ground?",
+   "talking_points": [
+    "Lost ~4 s of telemetry; added watchdog",
+    "Zero resets in next four tests"
+   ],
+   "project": "Rocket team avionics",
+   "resume_label": "Embedded"
+  },
+  "pitch:hermione:halcyon:default": {
+   "pitch": "I'm Hermione, computer engineering. I lead avionics on our rocket team: an STM32 flight computer in C with 50 Hz telemetry over LoRa. It reset on a brownout during a static fire. I added a hardware watchdog and brownout detection, and the next four tests had zero resets. Your Flight Software role lists watchdogs and telemetry, which is exactly that work.",
+   "question": "For Flight Software, how much testing is hardware-in-the-loop, and do new engineers build the test benches or use existing ones?",
+   "talking_points": [
+    "STM32 in C, 50 Hz LoRa telemetry",
+    "Watchdog fix: zero resets in four tests"
+   ],
+   "project": "Rocket team avionics",
+   "resume_label": "Embedded"
+  },
+  "pitch:hermione:copperline:default": {
+   "pitch": "I'm Hermione, computer engineering. I wrote the firmware for our rocket team's STM32 flight computer, in C. When it reset on a brownout during a static fire, I added a hardware watchdog and brownout detection. Zero resets in the next four tests. Your Firmware Intern role is bring-up on new microcontrollers, and that's where I'd want to start.",
+   "question": "For Firmware Intern bring-up, do interns get first silicon, or do they start on an earlier model of the chip?",
+   "talking_points": [
+    "STM32 firmware in C",
+    "Watchdog + brownout detection"
+   ],
+   "project": "Rocket team avionics",
+   "resume_label": "Embedded"
+  },
+  "pitch:hermione:gridwise:default": {
+   "pitch": "I'm Hermione, computer engineering. On our rocket team I built the STM32 flight computer and the 50 Hz LoRa telemetry. A brownout reset it during a static fire, so I added a hardware watchdog and brownout detection. Zero resets in the next four tests. Your Controls & Embedded role mentions watchdogs and field telemetry. I like work where you can measure whether it got better.",
+   "question": "When a battery site controller resets in the field, how do you find out, and how fast does someone see the telemetry?",
+   "talking_points": [
+    "Watchdog after brownout reset",
+    "50 Hz LoRa telemetry"
+   ],
+   "project": "Rocket team avionics",
+   "resume_label": "Embedded"
+  },
+  "pitch:percy:northwind:default": {
+   "pitch": "Good to meet you. My name is Percy, and I am completing my master's in Business Analytics. Before graduate school, I spent three years as an operations analyst, where I built SQL dashboards for 14 regional managers and reduced weekly reporting from six hours to forty minutes. Your Data Engineer role in Billing Analytics is about pipelines for usage data, and I would like to work on the pipeline side of that problem.",
+   "question": "For Billing Analytics, who consumes the pipelines first: finance, or the product teams that set pricing?",
+   "talking_points": [
+    "SQL dashboards for 14 managers",
+    "Reporting: 6 hours to 40 minutes"
+   ],
+   "project": "Operations analyst (Harbor & Rail Logistics)",
+   "resume_label": "Quant/Data"
+  },
+  "pitch:percy:northwind:more_like_me": {
+   "pitch": "What I would emphasize is a ridership forecast I built with a regional transit agency. Error fell from eighteen percent to eleven across forty-two bus lines, and I validated it on the worst weeks, not the average week, because that is when the agency needs to add buses. My name is Percy; I am in the Business Analytics master's program. Your Data Engineer role in Billing Analytics also produces numbers that people act on.",
+   "question": "For Billing Analytics, which decision depends most on the usage pipeline being correct, and who notices first when it is not?",
+   "talking_points": [
+    "MAPE 18% to 11%, 42 bus lines",
+    "Validated on the worst weeks, not the average"
+   ],
+   "project": "Transit ridership forecast",
+   "resume_label": "Quant/Data"
+  },
+  "pitch:percy:northwind:shorter": {
+   "pitch": "My name is Percy, and I am completing my master's in Business Analytics. As an operations analyst, I built SQL dashboards for 14 regional managers and reduced weekly reporting from six hours to forty minutes. That is why your Data Engineer role in Billing Analytics interests me.",
+   "question": "Who consumes the billing pipelines first: finance, or the product teams that set pricing?",
+   "talking_points": [
+    "14 managers; 6 hours to 40 minutes",
+    "Data Engineer, Billing Analytics"
+   ],
+   "project": "Operations analyst (Harbor & Rail Logistics)",
+   "resume_label": "Quant/Data"
+  },
+  "pitch:percy:ridgeway:default": {
+   "pitch": "Good to meet you. My name is Percy, and I am completing my master's in Business Analytics. For my capstone, I built a ridership forecast with a regional transit agency, using weather and event features across 42 bus lines, which reduced error from 18 to 11 percent. I validated it on the worst weeks, not the average week. Your Quantitative Research role emphasizes out-of-sample validation, which is the part of modeling I care about most.",
+   "question": "For Quantitative Research interns, how do you decide that a signal has failed out of sample, and how long do you observe it before deciding?",
+   "talking_points": [
+    "42 bus lines, MAPE 18% to 11%",
+    "Validated on the worst weeks"
+   ],
+   "project": "Transit ridership forecast",
+   "resume_label": "Quant/Data"
+  },
+  "pitch:percy:parcelpilot:default": {
+   "pitch": "Good to meet you. My name is Percy. Before graduate school, I spent three years as an operations analyst at a logistics firm. I began by interviewing 14 regional managers about what they checked each Monday, then built SQL dashboards around those questions. Weekly reporting went from six hours to forty minutes. Your Operations Data Analyst role covers delivery times and driver utilization, which is the same kind of question.",
+   "question": "For the Operations Data Analyst role, which decision does the driver utilization dashboard feed: dispatch each morning, or hiring drivers?",
+   "talking_points": [
+    "Interviewed 14 managers first",
+    "Reporting: 6 hours to 40 minutes"
+   ],
+   "project": "Operations analyst (Harbor & Rail Logistics)",
+   "resume_label": "Product Analyst"
+  },
+  "pitch:percy:meridian:default": {
+   "pitch": "Good to meet you. My name is Percy, and I am completing my master's in Business Analytics. In a credit default case competition, our team built logistic regression and gradient boosting models and placed second of 31 teams. Before graduate school, I spent three years building SQL dashboards as an operations analyst. Your Data Analyst role in Fraud combines credit risk modeling and SQL, which is the combination I have practiced.",
+   "question": "In the Fraud analyst role, how quickly does a new pattern you find become a rule in production, and who approves it?",
+   "talking_points": [
+    "Credit default model: 2nd of 31 teams",
+    "Three years of SQL dashboards"
+   ],
+   "project": "Credit default case competition",
+   "resume_label": "Quant/Data"
+  },
+  "pitch:percy:bayside:default": {
+   "pitch": "Good to meet you. My name is Percy, and I am completing my master's in Business Analytics. I built a ridership forecast with a regional transit agency across 42 bus lines; error fell from 18 to 11 percent. I validated it on the worst weeks, not the average week, because that is when the agency must add buses. Your Clinical Operations role forecasts patient volume, which is a similar planning decision.",
+   "question": "For patient volume forecasts, does the hospital staff to the forecast directly, or does someone adjust it first?",
+   "talking_points": [
+    "42 lines, error 18% to 11%",
+    "Worst weeks, not average"
+   ],
+   "project": "Transit ridership forecast",
+   "resume_label": "Quant/Data"
+  },
+  "note:hermione:northwind:Production Eng": {
+   "note": "Rewrote Prometheus alerts around SLOs at Trellis Commerce: 140 pages a week down to 53.\nFor the Production Engineer, Storage On-call role."
+  },
+  "note:hermione:northwind:Embedded": {
+   "note": "STM32 flight computer; added a watchdog after a brownout reset, zero resets in the next 4 tests.\nFor the Production Engineer, Storage On-call role."
+  },
+  "note:hermione:orbital:Embedded": {
+   "note": "STM32 flight computer with 50 Hz LoRa telemetry; added a watchdog after a brownout reset.\nFor the Embedded Linux Engineer role."
+  },
+  "note:viktor:northwind:AI/ML": {
+   "note": "Lab inference server: request batching took p95 from 2.1 s to 900 ms on one A10.\nFor the ML Engineer Intern, LLM Serving role."
+  },
+  "note:viktor:lumen:AI/ML": {
+   "note": "CourseQA: re-chunked ~400 lecture transcripts on timestamps; hit rate 60% to 85% on 120 labeled questions.\nFor Applied ML Engineer, Retrieval & Evals."
+  },
+  "note:percy:ridgeway:Quant/Data": {
+   "note": "Transit ridership forecast across 42 bus lines: MAPE 18% to 11%, validated on the worst weeks.\nFor the Quantitative Research Intern role."
+  },
+  "summary:viktor:northwind:AI/ML": {
+   "headline": "Cut LLM p95 latency from 2.1 s to 900 ms with request batching",
+   "highlights": [
+    "Lab inference server: 7B model on one A10; batching took p95 from 2.1 s to 900 ms",
+    "Retrieval assistant: hit rate 60% to 85% on 120 hand-labeled questions",
+    "Payments intern: Go reconciliation service, ~2M transactions/day; on-call"
+   ],
+   "best_role": "ML Engineer Intern, LLM Serving",
+   "fit_reason": "Direct batching and latency work on a hosted LLM; experience is single-GPU scale."
+  },
+  "summary:viktor:lumen:AI/ML": {
+   "headline": "Retrieval assistant with a hand-labeled eval set; hit rate 60% to 85%",
+   "highlights": [
+    "Indexed ~400 lecture transcripts; fixed chunks crossing lecture boundaries",
+    "Built a 120-question labeled eval set",
+    "Served a 7B model with batching; p95 2.1 s to 900 ms"
+   ],
+   "best_role": "Applied ML Engineer, Retrieval & Evals",
+   "fit_reason": "Chunking and eval-set work map directly to the role."
+  },
+  "summary:viktor:meridian:Backend": {
+   "headline": "Go reconciliation service at ~2M transactions/day",
+   "highlights": [
+    "Made reconciliation jobs idempotent after a double-count incident",
+    "Joined on-call rotation",
+    "Python/FastAPI service with request batching"
+   ],
+   "best_role": "Software Engineer, Payments",
+   "fit_reason": "Reconciliation, idempotency and on-call all appear in the role."
+  },
+  "summary:hermione:northwind:Production Eng": {
+   "headline": "SLO alert rewrite cut pages from 140 to 53 a week",
+   "highlights": [
+    "SRE intern: rewrote Prometheus alerts around SLOs; pages/week 140 to 53",
+    "Wrote runbooks for 9 services; led 2 post-incident reviews",
+    "Homelab k3s cluster with a weekly node-kill chaos test"
+   ],
+   "best_role": "Production Engineer, Storage On-call",
+   "fit_reason": "Measured alerting and incident work; no storage-specific systems yet."
+  },
+  "summary:hermione:orbital:Embedded": {
+   "headline": "STM32 flight computer, 50 Hz LoRa telemetry, watchdog fix",
+   "highlights": [
+    "Avionics lead: STM32 in C, telemetry at 50 Hz over LoRa",
+    "Brownout reset during static fire; added watchdog and brownout detection; no resets in next 4 tests",
+    "FreeRTOS, logic analyzer, oscilloscope"
+   ],
+   "best_role": "Embedded Linux Engineer",
+   "fit_reason": "Telemetry and watchdog work match; Linux on the flight computer not shown."
+  },
+  "summary:hermione:halcyon:Embedded": {
+   "headline": "Flight computer firmware in C with a watchdog fix",
+   "highlights": [
+    "STM32 flight computer in C; 50 Hz telemetry",
+    "Added hardware watchdog and brownout detection; 0 resets in next 4 tests",
+    "FreeRTOS experience"
+   ],
+   "best_role": "Embedded Software Engineer, Flight Software",
+   "fit_reason": "Watchdog and telemetry are listed in the role."
+  },
+  "summary:hermione:gridwise:Embedded": {
+   "headline": "Watchdog and telemetry work on a flight computer",
+   "highlights": [
+    "STM32 in C; 50 Hz telemetry over LoRa",
+    "Watchdog after brownout reset; 0 resets in next 4 tests"
+   ],
+   "best_role": "Controls & Embedded Engineer",
+   "fit_reason": "Watchdogs and field telemetry match."
+  },
+  "summary:percy:ridgeway:Quant/Data": {
+   "headline": "Forecast across 42 lines; MAPE 18% to 11%, validated on worst weeks",
+   "highlights": [
+    "Gradient-boosted ridership model with weather and event features",
+    "Credit default model: 2nd of 31 teams",
+    "SQL dashboards for 14 managers; reporting 6 h to 40 min"
+   ],
+   "best_role": "Quantitative Research Intern",
+   "fit_reason": "Time-series forecasting with out-of-sample focus; no backtesting of trading signals."
+  },
+  "summary:percy:parcelpilot:Product Analyst": {
+   "headline": "Logistics SQL dashboards built from 14 manager interviews",
+   "highlights": [
+    "Interviewed 14 regional managers, built dashboards around their questions",
+    "Weekly reporting 6 hours to 40 minutes",
+    "Forecasting: 42 bus lines, MAPE 18% to 11%"
+   ],
+   "best_role": "Operations Data Analyst",
+   "fit_reason": "Logistics operations analytics is the role's core."
+  },
+  "summary:percy:meridian:Quant/Data": {
+   "headline": "Credit default model, 2nd of 31 teams; strong SQL",
+   "highlights": [
+    "Logistic regression and gradient boosting for credit default",
+    "Three years of SQL dashboards",
+    "Forecasting: MAPE 18% to 11%"
+   ],
+   "best_role": "Data Analyst, Fraud",
+   "fit_reason": "Credit risk modeling plus SQL match the role."
+  },
+  "summary:percy:bayside:Quant/Data": {
+   "headline": "Operational forecasting, validated on worst weeks",
+   "highlights": [
+    "Ridership model across 42 lines: MAPE 18% to 11%",
+    "SQL dashboards for 14 managers"
+   ],
+   "best_role": "Data Scientist, Clinical Operations",
+   "fit_reason": "Forecasting for a staffing-type decision."
+  },
+  "transcript:viktor:northwind": {
+   "text": "Kingsley said the serving team is moving to continuous batching this spring and interns own one model end to end. Apply to the LLM Serving intern posting by Friday and mention the latency work."
+  },
+  "transcript:viktor:lumen": {
+   "text": "Padma said their eval sets start from customer tickets and they need someone to own chunking experiments. Send the resume to her directly."
+  },
+  "transcript:viktor:any": {
+   "text": "They said interns own one project end to end. Apply online this week and mention the latency work."
+  },
+  "transcript:hermione:orbital": {
+   "text": "Aurora said new engineers start on the telemetry path. Apply to the Embedded Linux posting this week."
+  },
+  "transcript:hermione:any": {
+   "text": "Recruiter said new hires shadow on-call for a month first. Apply online and mention the alert numbers."
+  },
+  "transcript:percy:ridgeway": {
+   "text": "Bill said interns present one signal to the research group at the end of the summer. Apply by the 30th and reference the transit project."
+  },
+  "transcript:percy:any": {
+   "text": "The recruiter said analysts present to managers every Monday. Apply online and reference the dashboard work."
+  },
+  "email:viktor:northwind": {
+   "subject": "Continuous batching and the LLM Serving intern role",
+   "body": "Hi Kingsley,\n\nThanks for the chat at the fair today. The part about moving to continuous batching this spring stuck with me. On our lab's inference server, batching is what took p95 from 2.1 seconds to 900 ms on one A10, so I'm curious how far continuous batching gets you past that.\n\nI'm applying to the LLM Serving intern posting before Friday, like you said, and I'll mention the latency work. If there's a name on the serving team I should reference, that would help.\n\nViktor",
+   "for_note": "Kingsley said the serving team is moving to continuous batching this spring and interns own one model end to end. Apply to the LLM Serving intern posting by Friday and mention the latency work."
+  },
+  "email:viktor:lumen": {
+   "subject": "Chunking experiments at Lumen Labs",
+   "body": "Hi Padma,\n\nThanks for the chat today. You said your eval sets start from customer tickets and you need someone to own chunking experiments. That's the exact problem I hit with CourseQA: chunks were cutting across lectures, and re-chunking around timestamps took hit rate from 60% to 85% on 120 questions I labeled by hand.\n\nResume attached, like you asked. Happy to walk through the eval set if that's useful.\n\nViktor",
+   "for_note": "Padma said their eval sets start from customer tickets and they need someone to own chunking experiments. Send the resume to her directly."
+  },
+  "email:hermione:orbital": {
+   "subject": "Telemetry path, Embedded Linux role",
+   "body": "Hi Aurora,\n\nThanks for talking at the fair. You said new engineers start on the telemetry path. That's where I've spent my time: STM32 flight computer, 50 Hz over LoRa, and a hardware watchdog after a brownout reset during a static fire. Zero resets in the next 4 tests.\n\nResume attached. I'll apply to the Embedded Linux posting this week. Is there a specific requisition I should use?\n\nHermione",
+   "for_note": "Aurora said new engineers start on the telemetry path. Apply to the Embedded Linux posting this week."
+  },
+  "email:percy:ridgeway": {
+   "subject": "Out-of-sample validation and the Quantitative Research internship",
+   "body": "Dear Bill,\n\nThank you for speaking with me at the career fair today. You mentioned that interns present one signal to the research group at the end of the summer. That structure appeals to me because my transit forecasting work was evaluated the same way: the model reduced error from 18 to 11 percent across 42 bus lines, and I validated it on the worst weeks rather than the average week.\n\nI will submit my application by the 30th, as you suggested, and I will reference the transit project. Thank you again for your time.\n\nBest regards,\nPercy",
+   "for_note": "Bill said interns present one signal to the research group at the end of the summer. Apply by the 30th and reference the transit project."
+  }
+ }
+}

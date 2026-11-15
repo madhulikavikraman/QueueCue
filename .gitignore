@@ -1,0 +1,14 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+build/
+app/build/
+*.iml
+.idea/
+.flutter-plugins
+.flutter-plugins-dependencies
+# Host data (database, uploads, logs, audio)
+server/data/
+# Local tools and models
+tools/whisper/*.bin
+.DS_Store

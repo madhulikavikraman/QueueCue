@@ -1,0 +1,1065 @@
+{
+  "fair": {
+    "id": "fall-fair",
+    "name": "Engineering & Tech Career Fair",
+    "venue": "Trousdale Parkway (outdoor tents)",
+    "duration_hours": 6,
+    "floor_w": 14,
+    "floor_h": 3
+  },
+  "booths": [
+    {
+      "id": "northwind",
+      "number": 1,
+      "name": "Northwind Cloud",
+      "category": "Big tech",
+      "tagline": "Cloud infrastructure and hosted AI models",
+      "about": "Runs a public cloud with storage, compute and a hosted LLM inference platform.",
+      "roles": [
+        {
+          "title": "ML Engineer Intern, LLM Serving",
+          "desc": "Work on the inference platform team: request batching, KV-cache management, GPU utilization and latency of hosted language models. Python, PyTorch, CUDA a plus.",
+          "skills": [
+            "python",
+            "pytorch",
+            "llm",
+            "inference",
+            "latency",
+            "gpu",
+            "batching",
+            "retrieval"
+          ]
+        },
+        {
+          "title": "Software Engineer, Distributed Storage",
+          "desc": "Build and operate the object storage service. Go or C++, distributed systems, consistency, replication.",
+          "skills": [
+            "go",
+            "c++",
+            "distributed systems",
+            "storage",
+            "replication"
+          ]
+        },
+        {
+          "title": "Production Engineer, Storage On-call",
+          "desc": "Own reliability for storage: SLOs, alerting, incident response, runbooks, capacity. Linux, Prometheus, Kubernetes.",
+          "skills": [
+            "sre",
+            "slo",
+            "alerting",
+            "prometheus",
+            "kubernetes",
+            "linux",
+            "on-call",
+            "runbooks",
+            "incident"
+          ]
+        },
+        {
+          "title": "Data Engineer, Billing Analytics",
+          "desc": "Pipelines for usage and billing data. SQL, Spark, Airflow, data modeling.",
+          "skills": [
+            "sql",
+            "spark",
+            "airflow",
+            "pipelines",
+            "data modeling"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Computer Engineering",
+        "Electrical Engineering",
+        "Data Science"
+      ],
+      "partial_majors": [
+        "Mathematics",
+        "Business Analytics",
+        "Statistics"
+      ],
+      "citizenship_required": false,
+      "x": 1,
+      "y": 1,
+      "recruiter": {
+        "name": "Kingsley Shacklebolt",
+        "email": "kingsley@northwind.example",
+        "password": "northwind"
+      },
+      "default_service_min": 3.1
+    },
+    {
+      "id": "lumen",
+      "number": 2,
+      "name": "Lumen Labs",
+      "category": "AI startup",
+      "tagline": "Retrieval and evaluation tools for LLM apps",
+      "about": "40-person startup building retrieval pipelines and evaluation tooling for teams shipping LLM features.",
+      "roles": [
+        {
+          "title": "Applied ML Engineer, Retrieval & Evals",
+          "desc": "Design chunking, embedding and reranking pipelines; build evaluation sets and metrics for answer quality. Python, vector databases.",
+          "skills": [
+            "python",
+            "retrieval",
+            "rag",
+            "embeddings",
+            "evaluation",
+            "llm",
+            "chunking"
+          ]
+        },
+        {
+          "title": "Founding Backend Engineer",
+          "desc": "APIs and job queues for ingestion of customer documents. Python or Go, Postgres, queues.",
+          "skills": [
+            "backend",
+            "go",
+            "python",
+            "postgres",
+            "queues",
+            "api"
+          ]
+        }
+      ],
+      "sponsors": "unknown",
+      "majors": [
+        "Computer Science",
+        "Data Science"
+      ],
+      "partial_majors": [
+        "Computer Engineering",
+        "Mathematics",
+        "Statistics"
+      ],
+      "citizenship_required": false,
+      "x": 2,
+      "y": 1,
+      "recruiter": {
+        "name": "Padma Patil",
+        "email": "padma@lumenlabs.example",
+        "password": "lumen"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "halcyon",
+      "number": 3,
+      "name": "Halcyon Systems",
+      "category": "Defense",
+      "tagline": "Flight software and RF systems",
+      "about": "Defense contractor building flight software and RF systems. All roles require US citizenship and eligibility for a security clearance.",
+      "roles": [
+        {
+          "title": "Embedded Software Engineer, Flight Software",
+          "desc": "C/C++ on real-time operating systems; flight computers, watchdogs, telemetry. US citizenship required.",
+          "skills": [
+            "c",
+            "c++",
+            "embedded",
+            "rtos",
+            "flight software",
+            "telemetry",
+            "watchdog"
+          ]
+        },
+        {
+          "title": "RF Systems Engineer",
+          "desc": "RF chain design and test. US citizenship required.",
+          "skills": [
+            "rf",
+            "antenna",
+            "signal processing",
+            "matlab"
+          ]
+        },
+        {
+          "title": "Systems Test Engineer",
+          "desc": "Hardware-in-the-loop test benches and test automation. US citizenship required.",
+          "skills": [
+            "test",
+            "hil",
+            "python",
+            "automation"
+          ]
+        }
+      ],
+      "sponsors": "no",
+      "majors": [
+        "Electrical Engineering",
+        "Computer Engineering",
+        "Aerospace Engineering",
+        "Computer Science"
+      ],
+      "partial_majors": [
+        "Mechanical Engineering"
+      ],
+      "citizenship_required": true,
+      "x": 3,
+      "y": 1,
+      "recruiter": {
+        "name": "Alastor Moody",
+        "email": "alastor@halcyon.example",
+        "password": "halcyon"
+      },
+      "default_service_min": 5
+    },
+    {
+      "id": "copperline",
+      "number": 4,
+      "name": "Copperline Semiconductors",
+      "category": "Embedded / EE",
+      "tagline": "Microcontrollers and power chips",
+      "about": "Designs microcontrollers and power-management chips used in consumer and industrial devices.",
+      "roles": [
+        {
+          "title": "Firmware Engineer Intern",
+          "desc": "Bring-up firmware for new microcontrollers. C, ARM Cortex-M, debugging with scopes and logic analyzers.",
+          "skills": [
+            "c",
+            "firmware",
+            "arm",
+            "stm32",
+            "embedded",
+            "debugging"
+          ]
+        },
+        {
+          "title": "Post-silicon Validation Engineer",
+          "desc": "Validate new chips in the lab. Python test automation, lab equipment.",
+          "skills": [
+            "validation",
+            "python",
+            "lab",
+            "test automation"
+          ]
+        },
+        {
+          "title": "Analog Design Intern",
+          "desc": "Circuit design and simulation for power management. SPICE, Cadence.",
+          "skills": [
+            "analog",
+            "spice",
+            "cadence",
+            "circuits"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Electrical Engineering",
+        "Computer Engineering"
+      ],
+      "partial_majors": [
+        "Computer Science"
+      ],
+      "citizenship_required": false,
+      "x": 4,
+      "y": 1,
+      "recruiter": {
+        "name": "Arthur Weasley",
+        "email": "arthur@copperline.example",
+        "password": "copperline"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "ridgeway",
+      "number": 5,
+      "name": "Ridgeway Capital",
+      "category": "Finance / Quant",
+      "tagline": "Systematic trading",
+      "about": "Systematic trading firm. Small teams, research-driven, heavy on statistics and backtesting.",
+      "roles": [
+        {
+          "title": "Quantitative Research Intern",
+          "desc": "Build and validate predictive signals; time-series modeling, backtesting, out-of-sample validation. Python, statistics.",
+          "skills": [
+            "python",
+            "statistics",
+            "time series",
+            "forecasting",
+            "backtesting",
+            "validation",
+            "modeling"
+          ]
+        },
+        {
+          "title": "Trading Systems Developer",
+          "desc": "Low-latency C++ trading infrastructure.",
+          "skills": [
+            "c++",
+            "low latency",
+            "linux",
+            "networking"
+          ]
+        },
+        {
+          "title": "Risk Analyst",
+          "desc": "Portfolio risk reporting and stress testing. SQL, Python.",
+          "skills": [
+            "risk",
+            "sql",
+            "python",
+            "reporting",
+            "stress testing"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Mathematics",
+        "Statistics",
+        "Data Science",
+        "Business Analytics",
+        "Finance"
+      ],
+      "partial_majors": [
+        "Electrical Engineering",
+        "Economics"
+      ],
+      "citizenship_required": false,
+      "x": 5,
+      "y": 1,
+      "recruiter": {
+        "name": "Bill Weasley",
+        "email": "bill@ridgeway.example",
+        "password": "ridgeway"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "parcelpilot",
+      "number": 6,
+      "name": "Parcel Pilot",
+      "category": "Startup / Logistics",
+      "tagline": "Route planning for local delivery fleets",
+      "about": "Seed-stage startup building route planning and dispatch software for local delivery fleets.",
+      "roles": [
+        {
+          "title": "Full-stack Engineer",
+          "desc": "TypeScript, React, Node, Postgres. Ship features end to end.",
+          "skills": [
+            "typescript",
+            "react",
+            "node",
+            "postgres",
+            "full-stack"
+          ]
+        },
+        {
+          "title": "Operations Data Analyst",
+          "desc": "Dashboards and analysis of delivery times and driver utilization. SQL, Python, Looker.",
+          "skills": [
+            "sql",
+            "dashboards",
+            "python",
+            "logistics",
+            "operations",
+            "reporting"
+          ]
+        }
+      ],
+      "sponsors": "no",
+      "majors": [
+        "Computer Science",
+        "Data Science",
+        "Business Analytics",
+        "Industrial & Systems Engineering"
+      ],
+      "partial_majors": [
+        "Economics",
+        "Mathematics"
+      ],
+      "citizenship_required": false,
+      "x": 6,
+      "y": 1,
+      "recruiter": {
+        "name": "Lee Jordan",
+        "email": "lee@parcelpilot.example",
+        "password": "parcelpilot"
+      },
+      "default_service_min": 3.5
+    },
+    {
+      "id": "bayside",
+      "number": 7,
+      "name": "Bayside Health Tech",
+      "category": "Health tech",
+      "tagline": "Clinical data platform for hospitals",
+      "about": "Builds a clinical data platform used by hospital networks for scheduling and outcomes analysis.",
+      "roles": [
+        {
+          "title": "Data Scientist, Clinical Operations",
+          "desc": "Forecast patient volume and no-shows; model validation; SQL, Python.",
+          "skills": [
+            "forecasting",
+            "python",
+            "sql",
+            "modeling",
+            "validation",
+            "statistics"
+          ]
+        },
+        {
+          "title": "Backend Engineer, Data Platform",
+          "desc": "HIPAA-compliant data pipelines and APIs. Python or Go.",
+          "skills": [
+            "backend",
+            "python",
+            "go",
+            "pipelines",
+            "api"
+          ]
+        }
+      ],
+      "sponsors": "unknown",
+      "majors": [
+        "Computer Science",
+        "Data Science",
+        "Biomedical Engineering",
+        "Business Analytics"
+      ],
+      "partial_majors": [
+        "Statistics",
+        "Mathematics"
+      ],
+      "citizenship_required": false,
+      "x": 7,
+      "y": 1,
+      "recruiter": {
+        "name": "Poppy Pomfrey",
+        "email": "poppy@baysidehealth.example",
+        "password": "bayside"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "orbital",
+      "number": 8,
+      "name": "Orbital Mesh",
+      "category": "Space startup",
+      "tagline": "Satellite-to-ground networking",
+      "about": "Startup building ground-station networking and onboard Linux software for small satellites.",
+      "roles": [
+        {
+          "title": "Embedded Linux Engineer",
+          "desc": "Onboard software for small satellites: Linux, C, telemetry, watchdogs, radio links.",
+          "skills": [
+            "embedded",
+            "linux",
+            "c",
+            "telemetry",
+            "lora",
+            "watchdog",
+            "radio"
+          ]
+        },
+        {
+          "title": "Network Software Engineer",
+          "desc": "Ground-station networking, Go, observability, alerting.",
+          "skills": [
+            "go",
+            "networking",
+            "observability",
+            "alerting",
+            "kubernetes"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Electrical Engineering",
+        "Computer Engineering",
+        "Aerospace Engineering"
+      ],
+      "partial_majors": [
+        "Mechanical Engineering"
+      ],
+      "citizenship_required": false,
+      "x": 8,
+      "y": 1,
+      "recruiter": {
+        "name": "Aurora Sinistra",
+        "email": "aurora@orbitalmesh.example",
+        "password": "orbital"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "kestrel",
+      "number": 9,
+      "name": "Kestrel Games",
+      "category": "Gaming",
+      "tagline": "Online multiplayer games",
+      "about": "Studio running two online multiplayer games with a live-ops team.",
+      "roles": [
+        {
+          "title": "Gameplay Engineer",
+          "desc": "C++ and Unreal; gameplay systems.",
+          "skills": [
+            "c++",
+            "unreal",
+            "gameplay"
+          ]
+        },
+        {
+          "title": "Live Ops Data Analyst",
+          "desc": "Player retention and event analysis. SQL, Python, experimentation.",
+          "skills": [
+            "sql",
+            "python",
+            "experimentation",
+            "dashboards",
+            "retention"
+          ]
+        },
+        {
+          "title": "Server Reliability Engineer",
+          "desc": "Game server uptime, alerting and incident response.",
+          "skills": [
+            "sre",
+            "alerting",
+            "incident",
+            "linux",
+            "kubernetes"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Computer Engineering",
+        "Interactive Media",
+        "Data Science"
+      ],
+      "partial_majors": [
+        "Business Analytics"
+      ],
+      "citizenship_required": false,
+      "x": 9,
+      "y": 1,
+      "recruiter": {
+        "name": "Fred Weasley",
+        "email": "fred@kestrel.example",
+        "password": "kestrel"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "meridian",
+      "number": 10,
+      "name": "Meridian Bank",
+      "category": "Finance",
+      "tagline": "Retail and commercial banking",
+      "about": "National bank hiring into payments engineering, fraud analytics and a technology rotation program.",
+      "roles": [
+        {
+          "title": "Software Engineer, Payments",
+          "desc": "Java and Go services for card and real-time payments; reconciliation, idempotency, on-call.",
+          "skills": [
+            "java",
+            "go",
+            "payments",
+            "reconciliation",
+            "backend",
+            "on-call"
+          ]
+        },
+        {
+          "title": "Data Analyst, Fraud",
+          "desc": "Fraud pattern analysis and credit risk models. SQL, Python.",
+          "skills": [
+            "sql",
+            "python",
+            "credit risk",
+            "fraud",
+            "modeling",
+            "dashboards"
+          ]
+        },
+        {
+          "title": "Technology Rotation Program",
+          "desc": "Three 8-month rotations across engineering, data and product.",
+          "skills": [
+            "rotation",
+            "sql",
+            "python",
+            "product"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Data Science",
+        "Finance",
+        "Business Analytics",
+        "Economics",
+        "Mathematics"
+      ],
+      "partial_majors": [
+        "Statistics",
+        "Computer Engineering"
+      ],
+      "citizenship_required": false,
+      "x": 10,
+      "y": 1,
+      "recruiter": {
+        "name": "Hannah Abbott",
+        "email": "hannah@meridianbank.example",
+        "password": "meridian"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "gridwise",
+      "number": 11,
+      "name": "Gridwise Energy",
+      "category": "Climate / Energy",
+      "tagline": "Battery storage control software",
+      "about": "Builds control software for grid-scale battery storage sites.",
+      "roles": [
+        {
+          "title": "Controls & Embedded Engineer",
+          "desc": "Battery site controllers; C, embedded Linux, watchdogs, field telemetry.",
+          "skills": [
+            "embedded",
+            "c",
+            "controls",
+            "telemetry",
+            "watchdog",
+            "linux"
+          ]
+        },
+        {
+          "title": "Power Systems Engineer",
+          "desc": "Grid interconnection studies.",
+          "skills": [
+            "power systems",
+            "matlab",
+            "grid"
+          ]
+        },
+        {
+          "title": "Data Platform Engineer",
+          "desc": "Time-series pipelines for site telemetry; forecasting of battery dispatch.",
+          "skills": [
+            "time series",
+            "pipelines",
+            "forecasting",
+            "python",
+            "sql"
+          ]
+        }
+      ],
+      "sponsors": "unknown",
+      "majors": [
+        "Electrical Engineering",
+        "Mechanical Engineering",
+        "Computer Science",
+        "Computer Engineering"
+      ],
+      "partial_majors": [
+        "Data Science"
+      ],
+      "citizenship_required": false,
+      "x": 11,
+      "y": 1,
+      "recruiter": {
+        "name": "Pomona Sprout",
+        "email": "pomona@gridwise.example",
+        "password": "gridwise"
+      },
+      "default_service_min": 4
+    },
+    {
+      "id": "stackline",
+      "number": 12,
+      "name": "Stackline Robotics",
+      "category": "Robotics",
+      "tagline": "Warehouse picking robots",
+      "about": "Builds warehouse picking robots; perception, controls and manufacturing test teams.",
+      "roles": [
+        {
+          "title": "Robotics Software Engineer, Perception",
+          "desc": "C++/Python perception pipelines, model deployment on edge GPUs.",
+          "skills": [
+            "python",
+            "c++",
+            "perception",
+            "gpu",
+            "pytorch",
+            "inference"
+          ]
+        },
+        {
+          "title": "Controls Engineer",
+          "desc": "Motion control for arms and grippers.",
+          "skills": [
+            "controls",
+            "c++",
+            "embedded"
+          ]
+        },
+        {
+          "title": "Manufacturing Test Engineer",
+          "desc": "End-of-line test stations, test automation in Python.",
+          "skills": [
+            "test",
+            "python",
+            "automation",
+            "embedded"
+          ]
+        }
+      ],
+      "sponsors": "yes",
+      "majors": [
+        "Computer Science",
+        "Mechanical Engineering",
+        "Electrical Engineering",
+        "Computer Engineering",
+        "Aerospace Engineering"
+      ],
+      "partial_majors": [
+        "Data Science"
+      ],
+      "citizenship_required": false,
+      "x": 12,
+      "y": 1,
+      "recruiter": {
+        "name": "Dean Thomas",
+        "email": "dean@stackline.example",
+        "password": "stackline"
+      },
+      "default_service_min": 4
+    }
+  ],
+  "personas": [
+    {
+      "persona": "viktor",
+      "number": 1042,
+      "interests": "LLM serving, retrieval, cricket, breaking things to see where they bend",
+      "bio": "MS CS. I TA intro ML and built a Q&A bot over 400 lecture transcripts.",
+      "name": "Viktor Krum",
+      "email": "viktor.krum@example.edu",
+      "phone": "213-555-0141",
+      "linkedin": "linkedin.com/in/viktor-krum-demo",
+      "major": "Computer Science",
+      "degree": "MS",
+      "grad_year": 2027,
+      "work_auth": "f1_cpt_opt",
+      "avatar": "fox",
+      "label": "Phone A: international CS student",
+      "resumes": [
+        {
+          "label": "AI/ML",
+          "is_default": false,
+          "text": "Viktor Krum | viktor.krum@example.edu | 213-555-0141 | linkedin.com/in/viktor-krum-demo\nEDUCATION\nMS Computer Science, expected May 2027. Coursework: Machine Learning, NLP, Distributed Systems.\nBTech Computer Science, 2023.\nPROJECTS\nCourseQA: retrieval Q&A assistant for a 300-student course (I was the TA). Indexed ~400 lecture transcripts. Answers were citing the wrong week; rebuilt chunking around lecture timestamps. Retrieval hit rate on 120 hand-labeled questions went from 60% to 85%. Used by students during finals week.\nLab inference server: served a 7B open model on a single A10 GPU for a research lab. Added request batching; p95 latency went from 2.1 s to 900 ms.\nEXPERIENCE\nBackend Engineer Intern, Paysetu (payments startup), Summer 2022: Go service for payment reconciliation, ~2M transactions/day; joined on-call rotation.\nSKILLS\nPython, PyTorch, Hugging Face, FAISS, retrieval, LLM inference, Go, Postgres, Docker"
+        },
+        {
+          "label": "Backend",
+          "is_default": true,
+          "text": "Viktor Krum | viktor.krum@example.edu | 213-555-0141\nEDUCATION\nMS Computer Science, expected May 2027.\nEXPERIENCE\nBackend Engineer Intern, Paysetu (payments startup), Summer 2022: built a Go service for payment reconciliation handling ~2M transactions/day; made reconciliation jobs idempotent after a double-count incident; joined the on-call rotation.\nPROJECTS\nLab inference server: Python/FastAPI service with request batching; p95 latency 2.1 s to 900 ms.\nCourseQA: Python API over a vector index of ~400 lecture transcripts.\nSKILLS\nGo, Python, Postgres, Redis, Docker, Kubernetes basics, REST APIs"
+        }
+      ],
+      "voice": {
+        "transcript": "Okay so the one I'm proudest of is honestly kind of a dumb story. I TA for the intro ML class, and I kept answering the same question like forty times a week. So I built this little bot over all the lecture transcripts. First version was bad. Someone asked about week nine and it kept pulling week three slides. Turns out my chunks were cutting across lectures. So I re-chunked everything around the timestamps, hand-labeled like a hundred and twenty questions, and the hit rate went from sixty to eighty-five percent. People actually used it during finals, which was the best part. I like breaking stuff to see where it bends, you know?",
+        "answers": [
+          "What kind of work do you want next? Stuff where the model already works and the hard part is making it fast and not wrong. Serving, retrieval, that kind of thing.",
+          "How do you explain your work to a non-engineer? I usually say it's like a librarian who has to find the right page before answering. Most of my bugs are the librarian grabbing the wrong book."
+        ],
+        "profile": {
+          "sentence_length": "short to medium; often starts with 'So' or 'Okay so'",
+          "rhythm": "story-first: sets up a problem, a failure, then the fix",
+          "contractions": true,
+          "formality": "casual",
+          "phrases": [
+            "honestly",
+            "turns out",
+            "kind of",
+            "I like breaking stuff to see where it bends",
+            "the best part"
+          ],
+          "self_description": "describes work through what went wrong first, then the fix; understates ('kind of a dumb story')",
+          "explains_technical": "analogy-first (librarian grabbing the wrong book), then one number",
+          "signature_details": [
+            "the bot kept pulling week three slides for week nine questions",
+            "answering the same question forty times a week as a TA",
+            "hand-labeled 120 questions; hit rate 60% to 85%",
+            "students used it during finals"
+          ]
+        }
+      }
+    },
+    {
+      "persona": "hermione",
+      "number": 4512,
+      "interests": "SRE, rocketry, homelab Kubernetes, on-call",
+      "bio": "Computer engineering. I cut a team’s pages from 140 a week to 53 and I lead avionics on our rocket team.",
+      "name": "Hermione Granger",
+      "email": "hermione.granger@example.edu",
+      "phone": "213-555-0177",
+      "linkedin": "linkedin.com/in/hermione-granger-demo",
+      "major": "Computer Engineering",
+      "degree": "BS",
+      "grad_year": 2026,
+      "work_auth": "citizen",
+      "avatar": "owl",
+      "label": "Phone B: computer engineering, US citizen",
+      "resumes": [
+        {
+          "label": "Production Eng",
+          "is_default": false,
+          "text": "Hermione Granger | hermione.granger@example.edu | 213-555-0177 | she/her\nEDUCATION\nBS Computer Engineering, May 2026.\nEXPERIENCE\nSite Reliability Intern, Trellis Commerce, Summer 2025: rewrote Prometheus alerts around SLOs; pages per week went from 140 to 53. Wrote runbooks for 9 services. Shadowed on-call for 6 weeks; led 2 post-incident reviews.\nPROJECTS\nHomelab: 3-node k3s cluster on Raspberry Pis; weekly chaos test that kills a node and checks recovery time.\nRocket team avionics lead: STM32 flight computer, 50 Hz telemetry over LoRa.\nSKILLS\nLinux, Prometheus, Grafana, Kubernetes, Terraform, Python, Bash, Go (basic)"
+        },
+        {
+          "label": "Embedded",
+          "is_default": true,
+          "text": "Hermione Granger | hermione.granger@example.edu | 213-555-0177\nEDUCATION\nBS Computer Engineering, May 2026.\nPROJECTS\nRocket team avionics lead: STM32 flight computer in C; 50 Hz telemetry over LoRa to ground station. Flight computer reset on a brownout during a static fire test; added a hardware watchdog and brownout detection; no resets in the next 4 tests.\nEXPERIENCE\nSite Reliability Intern, Trellis Commerce, Summer 2025: alerting and runbooks; pages per week 140 to 53.\nSKILLS\nC, STM32, FreeRTOS, logic analyzer, oscilloscope, KiCad, Python, Linux"
+        }
+      ],
+      "voice": {
+        "transcript": "Rocket team. Our flight computer reset during a static fire. Brownout. We lost about four seconds of telemetry. I added a hardware watchdog and brownout detection. Next four tests, zero resets. That's the one. Telemetry runs at fifty hertz over LoRa. I also did SRE last summer. Pages went from one forty a week to fifty-three. I like work where you can measure whether it got better.",
+        "answers": [
+          "What kind of work do you want next? Reliability. On-call for something real. I want the pager.",
+          "How do you explain your work to a non-engineer? I give them the number first. 140 pages a week, now 53. Then what changed."
+        ],
+        "profile": {
+          "sentence_length": "very short; fragments are fine",
+          "rhythm": "numbers-first: leads with the metric, then the cause",
+          "contractions": true,
+          "formality": "neutral",
+          "phrases": [
+            "That's the one",
+            "I want the pager",
+            "measure whether it got better",
+            "zero resets"
+          ],
+          "self_description": "states what she did in plain verbs; no adjectives",
+          "explains_technical": "numbers-first: metric, then what changed",
+          "signature_details": [
+            "brownout reset during a static fire",
+            "pages 140 a week to 53",
+            "telemetry at 50 Hz over LoRa",
+            "next four tests, zero resets"
+          ]
+        }
+      }
+    },
+    {
+      "persona": "percy",
+      "number": 3307,
+      "interests": "Forecasting, operations analytics, transit, chess",
+      "bio": "MS Business Analytics. Three years as an operations analyst before grad school.",
+      "name": "Percy Weasley",
+      "email": "percy.weasley@example.edu",
+      "phone": "213-555-0190",
+      "linkedin": "linkedin.com/in/percy-weasley-demo",
+      "major": "Business Analytics",
+      "degree": "MS",
+      "grad_year": 2026,
+      "work_auth": "permanent_resident",
+      "avatar": "bear",
+      "label": "Business analytics, formal voice",
+      "resumes": [
+        {
+          "label": "Quant/Data",
+          "is_default": true,
+          "text": "Percy Weasley | percy.weasley@example.edu | 213-555-0190\nEDUCATION\nMS Business Analytics, May 2026.\nPROJECTS\nTransit ridership forecasting (capstone with a regional transit agency): gradient-boosted model with weather and event features across 42 bus lines; MAPE from 18% to 11%. Validated on the worst-performing weeks, not only the average.\nCredit default case competition: logistic regression and gradient boosting; 2nd of 31 teams.\nEXPERIENCE\nOperations Analyst, Harbor & Rail Logistics, 2021-2024: SQL dashboards used by 14 regional managers; automated weekly reporting from 6 hours to 40 minutes.\nSKILLS\nPython, pandas, scikit-learn, LightGBM, SQL, Tableau, time-series forecasting, statistics"
+        },
+        {
+          "label": "Product Analyst",
+          "is_default": false,
+          "text": "Percy Weasley | percy.weasley@example.edu\nEDUCATION\nMS Business Analytics, May 2026.\nEXPERIENCE\nOperations Analyst, Harbor & Rail Logistics, 2021-2024: interviewed 14 regional managers about what they checked each Monday; built SQL dashboards around those questions; weekly reporting went from 6 hours to 40 minutes.\nPROJECTS\nTransit ridership forecasting: 42 bus lines, MAPE 18% to 11%.\nSKILLS\nSQL, Tableau, Looker, A/B testing, Python, stakeholder interviews"
+        }
+      ],
+      "voice": {
+        "transcript": "The project I am most proud of is a ridership forecasting model I built with a regional transit agency for my capstone. The agency's existing forecast was off by about eighteen percent. I added weather and event features and brought the error to eleven percent across forty-two bus lines. What I would emphasize is that I validated the model against the worst weeks, not the average week, because that is when the agency actually needs to add buses. Before graduate school, I spent three years as an operations analyst, and that experience taught me to begin with the question the manager needs answered.",
+        "answers": [
+          "What kind of work do you want next? I would like a role where forecasts are used to make an operational decision, and where I am accountable for whether the decision improved.",
+          "How do you explain your work to a non-engineer? I begin with the decision the number supports. Then I explain how accurate the number is, and when it should not be trusted."
+        ],
+        "profile": {
+          "sentence_length": "medium to long, complete sentences",
+          "rhythm": "structured: context, then method, then result, then why it matters",
+          "contractions": false,
+          "formality": "formal",
+          "phrases": [
+            "What I would emphasize is",
+            "the worst weeks, not the average week",
+            "begin with the question",
+            "accountable for whether the decision improved"
+          ],
+          "self_description": "measured and precise; credits the context (the agency, the managers)",
+          "explains_technical": "decision-first, then accuracy and limits",
+          "signature_details": [
+            "validated on the worst weeks, not the average week",
+            "MAPE 18% to 11% across 42 bus lines",
+            "14 regional managers",
+            "reporting from 6 hours to 40 minutes"
+          ]
+        }
+      }
+    }
+  ],
+  "sim_first_names": [
+    "Neville",
+    "Luna",
+    "Ginny",
+    "Seamus",
+    "Lavender",
+    "Parvati",
+    "Ernie",
+    "Justin",
+    "Susan",
+    "Terry",
+    "Michael",
+    "Anthony",
+    "Katie",
+    "Angelina",
+    "Alicia",
+    "Oliver",
+    "Cedric",
+    "Fleur",
+    "Gabrielle",
+    "Colin",
+    "Dennis",
+    "Romilda",
+    "Cormac",
+    "Draco",
+    "Pansy",
+    "Blaise",
+    "Theodore",
+    "Millicent",
+    "Gregory",
+    "Vincent",
+    "Penelope",
+    "Roger",
+    "Marietta",
+    "Zacharias",
+    "Megan",
+    "Eloise",
+    "Ron",
+    "Harry",
+    "Cho",
+    "Lucius"
+  ],
+  "sim_profiles": [
+    {
+      "major": "Computer Science",
+      "skills": [
+        "python",
+        "react",
+        "sql",
+        "backend",
+        "api"
+      ]
+    },
+    {
+      "major": "Computer Science",
+      "skills": [
+        "c++",
+        "distributed systems",
+        "go",
+        "linux"
+      ]
+    },
+    {
+      "major": "Data Science",
+      "skills": [
+        "python",
+        "sql",
+        "statistics",
+        "modeling",
+        "dashboards"
+      ]
+    },
+    {
+      "major": "Electrical Engineering",
+      "skills": [
+        "analog",
+        "circuits",
+        "matlab",
+        "embedded"
+      ]
+    },
+    {
+      "major": "Computer Engineering",
+      "skills": [
+        "c",
+        "embedded",
+        "firmware",
+        "rtos"
+      ]
+    },
+    {
+      "major": "Mechanical Engineering",
+      "skills": [
+        "controls",
+        "cad",
+        "matlab",
+        "test"
+      ]
+    },
+    {
+      "major": "Finance",
+      "skills": [
+        "risk",
+        "sql",
+        "reporting",
+        "excel"
+      ]
+    },
+    {
+      "major": "Computer Science",
+      "skills": [
+        "python",
+        "pytorch",
+        "llm",
+        "retrieval",
+        "evaluation"
+      ]
+    },
+    {
+      "major": "Business Analytics",
+      "skills": [
+        "sql",
+        "tableau",
+        "forecasting",
+        "python"
+      ]
+    },
+    {
+      "major": "Aerospace Engineering",
+      "skills": [
+        "c",
+        "telemetry",
+        "matlab",
+        "controls"
+      ]
+    },
+    {
+      "major": "Computer Science",
+      "skills": [
+        "kubernetes",
+        "sre",
+        "alerting",
+        "linux",
+        "go"
+      ]
+    },
+    {
+      "major": "Interactive Media",
+      "skills": [
+        "unreal",
+        "c++",
+        "gameplay"
+      ]
+    }
+  ]
+}
