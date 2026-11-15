@@ -89,6 +89,55 @@ Router buildApi(QQ qq) {
     });
   });
 
+  /// Demo Mode only: the ten showcase students and the points engine at work.
+  r.get('/api/demo/showcase', (Request req) {
+    if (!qq.demoMode) throw ApiError(404, 'Showcase is only available in Demo Mode.');
+    const ruleLabels = {
+      'conversation': 'Verified conversation',
+      'asked_question': 'Asked their pitch question',
+      'drop': 'Resume drop (by fit)',
+      'matched_resume': 'Used the matched resume',
+      'rolodex_note': 'Note within 10 min',
+      'follow_up': 'Follow-up within 24 h',
+      'off_beaten': 'Off the beaten booth',
+      'early_bird': 'Early Bird',
+    };
+    final out = <Map<String, Object?>>[];
+    for (final sc in Seeder.showcase) {
+      final first = (sc[0] as String).split(' ').first.toLowerCase();
+      final s = db.one('SELECT * FROM students WHERE id=?', ['stu-$first']);
+      if (s == null) continue;
+      final sid = s['id'] as String;
+      final pts = qq.game.totalPoints(sid);
+      final ledger = db.all(
+          'SELECT p.rule, p.points, p.award_at, b.name AS booth FROM points p LEFT JOIN booths b ON b.id=p.booth_id WHERE p.student_id=? ORDER BY p.created_at',
+          [sid]);
+      out.add({
+        'card': qq.studentCard(s),
+        'token': s['token'],
+        'points': pts,
+        'pending': qq.game.pendingPoints(sid),
+        'level': qq.game.level(pts),
+        'ledger': [
+          for (final l in ledger)
+            {'rule': ruleLabels[l['rule']] ?? l['rule'], 'points': l['points'], 'booth': l['booth'], 'pending': (l['award_at'] as int) > qq.clock()}
+        ],
+        'met': [
+          for (final e in db.all('SELECT e.booth_id, e.created_at FROM exchanges e WHERE e.student_id=? ORDER BY e.created_at', [sid]))
+            {...qq.recruiterCard(qq.booth(e['booth_id'] as String)), 'met_at': e['created_at']}
+        ],
+        'dropped': [
+          for (final d in db.all("SELECT b.name, b.number FROM drops d JOIN booths b ON b.id=d.booth_id WHERE d.student_id=? AND d.kind='drop'", [sid]))
+            {'name': d['name'], 'number': d['number']}
+        ],
+        'friends': db.scalar('SELECT COUNT(*) FROM friends WHERE student_id=?', [sid]),
+        'badges': db.all('SELECT badge FROM badges WHERE student_id=?', [sid]).map((b) => b['badge']).toList(),
+      });
+    }
+    out.sort((a, b) => (b['points'] as int).compareTo(a['points'] as int));
+    return jsonOk({'students': out, 'recruiters': [for (final id in Seeder.showcaseBooths) qq.recruiterCard(qq.booth(id))]});
+  });
+
   // ================================================================= student: onboarding
   r.post('/api/students', (Request req) async {
     final j = await readJson(req);

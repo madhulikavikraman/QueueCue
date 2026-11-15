@@ -99,7 +99,7 @@ class MeTab extends ConsumerWidget {
               ]),
             ),
             SectionTitle(S.badges, sub: 'Unlocked once.'),
-            Wrap(spacing: T.s3, runSpacing: T.s3, children: [
+            Wrap(alignment: WrapAlignment.center, spacing: T.s3, runSpacing: T.s3, children: [
               for (final b in badges)
                 SizedBox(
                   width: 96,

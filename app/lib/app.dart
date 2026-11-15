@@ -12,6 +12,7 @@ import 'features/about/about_page.dart';
 import 'features/booth/student_booth_page.dart';
 import 'features/game/fairplay_page.dart';
 import 'features/game/recap_page.dart';
+import 'features/game/showcase_page.dart';
 import 'features/game/receipts_page.dart';
 import 'features/onboarding/onboarding_page.dart';
 import 'features/onboarding/student_login_page.dart';
@@ -34,6 +35,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/welcome', builder: (c, s) => const WelcomePage()),
       // One link per feature, for jumping straight to any screen in a demo.
       GoRoute(path: '/links', builder: (c, s) => const LinksPage()),
+      GoRoute(path: '/showcase', builder: (c, s) => const ShowcasePage()),
       for (final (i, name) in ['map', 'booths', 'quests', 'cards', 'me'].indexed)
         GoRoute(path: '/$name', builder: (c, s) => _StudentGate(child: HomeShell(key: ValueKey('s$i'), initialTab: i))),
       for (final (i, name) in ['line', 'candidates', 'cards', 'me'].indexed)

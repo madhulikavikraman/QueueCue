@@ -58,7 +58,7 @@ class RecapPage extends ConsumerWidget {
                     _Stat('${r['points']}', '${S.points} · level ${lvl['name']}',
                         sub: (r['pending_points'] as num) > 0 ? '+${r['pending_points']} arriving tomorrow' : null),
                     const SizedBox(height: T.s3),
-                    Wrap(spacing: T.s3, runSpacing: T.s3, children: [
+                    Wrap(alignment: WrapAlignment.center, spacing: T.s3, runSpacing: T.s3, children: [
                       for (final b in badges)
                         Column(mainAxisSize: MainAxisSize.min, children: [
                           PixelBadge(b['id'] as String, earned: true, size: 36),

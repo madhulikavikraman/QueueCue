@@ -34,6 +34,8 @@ Row requireStudent(QQ qq, Request r) {
 Middleware errorMiddleware(void Function(String) log) => (inner) => (req) async {
       try {
         return await inner(req);
+      } on HijackException {
+        rethrow; // WebSocket upgrade: not an error, let shelf take the socket.
       } on ApiError catch (e) {
         return jsonOk({'error': e.message, ...e.extra}, status: e.status);
       } catch (e, st) {

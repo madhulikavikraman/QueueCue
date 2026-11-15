@@ -5,6 +5,7 @@ import '../../core/api/api.dart';
 import '../../core/design/tokens.dart';
 import '../../core/widgets/common.dart';
 import '../../core/widgets/live_builder.dart';
+import '../../core/widgets/rolodex.dart';
 import '../../core/widgets/states.dart';
 import '../rolodex/rolodex_tab.dart' show RolodexCard;
 
@@ -169,6 +170,8 @@ class _CardTabState extends ConsumerState<CardTab> {
               ],
               const SizedBox(height: T.s5),
               const BigHeading('Rolodex'),
+              RolodexWheel(cards: [...recruiters, ...friends]),
+              const SizedBox(height: T.s3),
               SegmentedButton<int>(
                 segments: [
                   ButtonSegment(value: 0, label: Text('Recruiters (${recruiters.length})'), icon: const Icon(Icons.badge_outlined)),

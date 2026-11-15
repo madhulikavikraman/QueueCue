@@ -201,6 +201,7 @@ class Seeder {
       }
     }
     if (withActivity) _seedActivity(simIds, startsAt, now);
+    if (withActivity) await _seedShowcase(startsAt, now, personaIds);
     db.setMeta('seeded_at', '$now');
     qq.changed(['fair', 'organizer', for (final b in qq.booths()) 'booth:${b['id']}', for (final pid in personaIds) 'student:$pid']);
   }
@@ -361,6 +362,162 @@ class Seeder {
       }
     }
   }
+
+  /// Ten showcase students who talked to some of the same three recruiters,
+  /// driven through the real Fair Play points engine (not hand-set totals).
+  static const showcase = [
+    // name, avatar, major, interests, bio, convos, asked, notes, followups, drops, earlyBird
+    ['Harry Potter', 'owl', 'Computer Science', 'Seeker, LLM agents, flying', 'Built a broomstick telemetry dashboard; 3 hackathon wins.', 3, 3, 3, 3, 2, true],
+    ['Ginny Weasley', 'fox', 'Computer Engineering', 'Embedded, sports analytics', 'Firmware for a quidditch-ball tracker at 100 Hz.', 3, 2, 2, 0, 1, true],
+    ['Cedric Diggory', 'bear', 'Computer Science', 'Distributed systems, mentoring', 'Ran on-call for a 40-node club cluster.', 3, 1, 0, 0, 0, false],
+    ['Cho Chang', 'cat', 'Data Science', 'Retrieval, evaluation, chess', 'Labeled 500 queries to evaluate a search engine.', 2, 2, 2, 2, 0, false],
+    ['Ron Weasley', 'frog', 'Computer Science', 'Game AI, chess', 'Wrote a chess bot that beats 80% of club members.', 2, 1, 1, 0, 1, false],
+    ['Katie Bell', 'bunny', 'Electrical Engineering', 'Power systems, robotics', 'Designed a battery monitor for a rover team.', 2, 0, 2, 0, 0, true],
+    ['Luna Lovegood', 'otter', 'Data Science', 'Anomaly detection, astronomy', 'Found 12 variable stars in public telescope data.', 1, 1, 1, 0, 3, false],
+    ['Neville Longbottom', 'koala', 'Mechanical Engineering', 'Controls, greenhouse IoT', 'Automated watering for 30 plants with soil sensors.', 1, 0, 0, 0, 1, false],
+    ['Oliver Wood', 'tiger', 'Computer Science', 'Sports tech, backend', 'Backend for a league scheduling app, 600 users.', 1, 0, 0, 0, 0, false],
+    ['Seamus Finnigan', 'panda', 'Mechanical Engineering', 'Pyrotechnics safety, CAD', 'Test rig for a student rocket ignition system.', 0, 0, 0, 0, 2, false],
+  ];
+  static const showcaseBooths = ['northwind', 'lumen', 'orbital'];
+  static const _showcaseSkills = {
+    'Computer Science': 'Python, PyTorch, LLM inference, retrieval, Go, Postgres, Kubernetes, SRE, alerting',
+    'Computer Engineering': 'C, STM32, embedded, firmware, telemetry, watchdog, Linux, Python',
+    'Data Science': 'Python, SQL, retrieval, evaluation, embeddings, statistics, forecasting, dashboards',
+    'Electrical Engineering': 'C, embedded, controls, telemetry, MATLAB, circuits, Linux',
+    'Mechanical Engineering': 'controls, CAD, MATLAB, test automation, embedded',
+  };
+
+  Future<void> _seedShowcase(int startsAt, int now, List<String> personaIds) async {
+    final ids = <String>[];
+    for (var k = 0; k < showcase.length; k++) {
+      final sc = showcase[k];
+      final name = sc[0] as String;
+      final first = name.split(' ').first.toLowerCase();
+      final id = 'stu-$first';
+      final early = sc[10] as bool;
+      db.insert('students', {
+        'id': id,
+        'fair_id': qq.fairId,
+        'token': demoToken(first),
+        'number': _simNumber(),
+        'name': name,
+        'email': '${name.toLowerCase().replaceAll(' ', '.')}@example.edu',
+        'password_hash': 'hogwarts',
+        'major': sc[2],
+        'degree': k.isEven ? 'BS' : 'MS',
+        'grad_year': 2026 + k % 2,
+        'work_auth': k % 4 == 1 ? 'f1_cpt_opt' : 'citizen',
+        'avatar': sc[1],
+        'interests': sc[3],
+        'bio': sc[4],
+        'leaderboard_opt_in': 1,
+        'onboarded': 1,
+        'checked_in_at': startsAt + (early ? 15 + k * 3 : 70 + k * 9) * 60 * 1000,
+        'created_at': startsAt,
+      });
+      final txt = 'EDUCATION\n${sc[2]}\nPROJECTS\n${(sc[4] as String).replaceFirst('.', ':')}\n'
+          'Course project: built a tool with ${_showcaseSkills[sc[2]]!.split(', ').take(3).join(', ')}; tested with ${20 + k * 7} users.\n'
+          'SKILLS\n${_showcaseSkills[sc[2]]}';
+      db.insert('resumes', {
+        'id': 'r-$first',
+        'student_id': id,
+        'label': 'Main',
+        'text': txt,
+        'blind_text': blindResume(txt, nameTokens: name.split(' ')),
+        'is_default': 1,
+        'created_at': startsAt,
+      });
+      for (final b in qq.booths()) {
+        await qq.computeFit(id, b['id'] as String);
+      }
+      qq.game.chooseQuests(id, force: true);
+      qq.game.onCheckIn(id);
+      ids.add(id);
+    }
+    // Drive the real points engine.
+    final dropBooths = ['ridgeway', 'stackline', 'meridian', 'kestrel', 'gridwise'];
+    final realClock = qq.clock;
+    for (var k = 0; k < showcase.length; k++) {
+      final sc = showcase[k];
+      final sid = ids[k];
+      final convos = sc[5] as int, asked = sc[6] as int, notes = sc[7] as int, follow = sc[8] as int, drops = sc[9] as int;
+      for (var j = 0; j < convos; j++) {
+        final bid = showcaseBooths[(j + k) % 3];
+        // Conversations with a note happened a few minutes ago (notes within
+        // 10 minutes earn points); the rest earlier in the day.
+        final at = j < notes ? now - (4 + j) * 60 * 1000 : now - (40 + 25 * j + 7 * k) * 60 * 1000;
+        final waited = (8 + 5 * j + k).toDouble();
+        db.insert('queue_entries', {
+          'booth_id': bid,
+          'student_id': sid,
+          'joined_at': at - (waited * 60000).round(),
+          'left_at': at,
+          'status': 'served',
+          'est_wait_at_join': k == 1 && bid == 'orbital' ? 5.0 : waited,
+        });
+        final exId = db.insert('exchanges', {
+          'booth_id': bid,
+          'student_id': sid,
+          'method': 'card',
+          'confirmed_by': 'recruiter',
+          'waited_min': waited,
+          'resume_id': 'r-${sid.substring(4)}',
+          'created_at': at,
+        });
+        db.upsert('rolodex', {'student_id': sid, 'booth_id': bid, 'exchange_id': exId, 'created_at': at}, ['student_id', 'booth_id']);
+        qq.clock = () => at + 30 * 1000;
+        qq.game.onExchange(sid, bid, exId);
+        if (j < asked) qq.askedQuestion(sid, bid);
+        if (j < notes) {
+          qq.clock = () => at + 3 * 60 * 1000;
+          qq.rolodexNote(sid, bid, ['Asked about the intern project scope.', 'They want someone for evals; apply this week.', 'Recruiter liked the telemetry demo.'][j % 3]);
+        }
+        if (j < follow) {
+          qq.clock = () => at + 20 * 60 * 1000;
+          qq.emailSent(sid, bid);
+        }
+        qq.clock = realClock;
+        db.insert('recruiter_marks', {
+          'booth_id': bid,
+          'student_id': sid,
+          'stars': (3 + (k + j) % 3).toDouble(),
+          'pile': ['Standout', 'Strong', 'Maybe'][(k + j) % 3],
+          'tags_json': je([quickTagsFor(k + j)]),
+          'memory_note': j < notes ? 'Asked a sharp question about the role' : null,
+          'updated_at': at,
+        });
+        qq.offlineSummary(bid, sid, 'r-${sid.substring(4)}');
+      }
+      for (var j = 0; j < drops; j++) {
+        final bid = dropBooths[(k + j) % dropBooths.length];
+        qq.drop(sid, bid, resumeId: 'r-${sid.substring(4)}', note: '');
+      }
+    }
+    qq.clock = realClock;
+    // Friends: the showcase ring + the three demo students, all opted in.
+    final all = [...ids, ...personaIds];
+    for (final a in all) {
+      for (final b in all) {
+        if (a == b) continue;
+        db.upsert('friends', {'student_id': a, 'friend_id': b, 'created_at': startsAt}, ['student_id', 'friend_id']);
+      }
+    }
+  }
+
+  /// Adds the showcase students to an existing database (keeps everything else).
+  Future<bool> addShowcaseIfMissing() async {
+    if (db.one('SELECT 1 FROM fairs') == null) return false; // nothing seeded yet
+    if (db.one("SELECT 1 FROM students WHERE id='stu-harry'") != null) return false;
+    final f = qq.fair();
+    final personas = db.all('SELECT id FROM students WHERE persona IS NOT NULL').map((r) => r['id'] as String).toList();
+    for (final n in db.all('SELECT number FROM students WHERE number IS NOT NULL')) {
+      _used.add(n['number'] as int);
+    }
+    await _seedShowcase(f['starts_at'] as int, qq.clock(), personas);
+    return true;
+  }
+
+  static String quickTagsFor(int i) => const ['Strong project', 'Great questions', 'Clear communicator', 'Researched us', 'Role fit'][i % 5];
 
   String _memo() => const [
         'robotics club, asked about sim-to-real',

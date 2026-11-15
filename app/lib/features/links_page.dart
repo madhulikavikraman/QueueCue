@@ -60,6 +60,10 @@ class LinksPage extends ConsumerWidget {
             link('/about', 'About', 'The problem and the fairness rules', Icons.info_outline),
           ]),
         ),
+        Card(
+          color: T.accent,
+          child: link('/showcase', 'Fair Play points: live demo', '10 students, 3 recruiters, points and animated rolodexes', Icons.emoji_events),
+        ),
         const SectionTitle('Student app'),
         Card(
           child: Column(children: [

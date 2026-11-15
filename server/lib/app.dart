@@ -57,6 +57,15 @@ Future<QQ> buildQQ(Config cfg, {String? dbPath, int Function()? clock, bool seed
     await Seeder(qq).run();
   }
   _shortenCardNumbers(qq);
+  if (qq.demoMode && await Seeder(qq).addShowcaseIfMissing()) stdout.writeln('Added the 10 showcase students.');
+  // The project folder can move; re-point stored PDF paths at this uploads folder.
+  final up = cfg.resolve(cfg.uploadsDir);
+  for (final r in qq.db.all('SELECT id, pdf_path FROM resumes WHERE pdf_path IS NOT NULL')) {
+    final old = r['pdf_path'] as String;
+    if (File(old).existsSync()) continue;
+    final moved = p.join(up, p.basename(old));
+    if (File(moved).existsSync()) qq.db.exec('UPDATE resumes SET pdf_path=? WHERE id=?', [moved, r['id']]);
+  }
   // Offline summaries are cheap: rebuild them so parser fixes apply to old data.
   for (final r in qq.db.all('SELECT booth_id, student_id, resume_id, json FROM summaries')) {
     if ((r['json'] as String).contains('"source":"offline"')) {
