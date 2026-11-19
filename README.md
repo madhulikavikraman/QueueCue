@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/1200f708-005d-4e4f-adb9-44da06ef267b
+
 # QueueCue (qq)
 
 > QueueCue (qq). Because job hunting makes everyone want to cry.
@@ -7,6 +11,10 @@
 At campus career fairs, popular booths have 2+ hour lines, students print many copies of the same resume, many scan a booth QR code and leave without reaching a recruiter, and almost nobody prepares a company-specific pitch. Recruiters get a pile of paper and no way to find the best fits.
 
 ## What QueueCue does
+
+
+
+https://github.com/user-attachments/assets/4372a572-f92b-447f-b4d8-6766219e3811
 
 
 **Students (phone web app, installable to the home screen)**
