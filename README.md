@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/1200f708-005d-4e4f-adb9-44da06ef267b
-
 # QueueCue (qq)
 
 > QueueCue (qq). Because job hunting makes everyone want to cry.
