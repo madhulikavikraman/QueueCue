@@ -77,7 +77,7 @@ if [ "$USE_TUNNEL" = 1 ] && command -v cloudflared >/dev/null; then
   cloudflared tunnel --no-autoupdate --url "http://localhost:$PORT" >"$LOG/tunnel.log" 2>&1 &
   PIDS+=($!)
   for i in $(seq 1 40); do
-    URL="$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' "$LOG/tunnel.log" | head -1)"
+    URL="$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' "$LOG/tunnel.log" | grep -v '//api\.' | head -1)"
     [ -n "$URL" ] && break; sleep 1
   done
   [ -n "$URL" ] && ok "Cloudflare quick tunnel: $URL" || warn "Tunnel did not come up (see $LOG/tunnel.log). Falling back to LAN."

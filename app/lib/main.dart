@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
@@ -25,6 +26,10 @@ Future<void> main() async {
     } catch (_) {}
   }
   final q = Uri.base.queryParameters;
+  // ?a11y=1 turns on the accessibility tree (screen readers, and scripted demo
+  // recordings that click buttons by their labels).
+  if (q['a11y'] != null) await Prefs.set('qq_a11y', q['a11y'] == '1' ? '1' : '');
+  if (q['a11y'] == '1' || await Prefs.get('qq_a11y') == '1') SemanticsBinding.instance.ensureSemantics();
   // Demo convenience: /?student=demo-viktor signs in as a seeded student.
   final asDemo = q['student'];
   if (asDemo != null && asDemo.startsWith('demo-')) {

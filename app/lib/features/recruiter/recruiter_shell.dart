@@ -13,40 +13,40 @@ import 'quick_rate.dart';
 import 'recruiter_edit.dart';
 import 'recruiter_page.dart';
 
-/// The recruiter app: separate from the student app, with its own tabs.
-class RecruiterShell extends ConsumerStatefulWidget {
-  final RecruiterAuth auth;
-  final int initialTab;
-  const RecruiterShell({super.key, required this.auth, this.initialTab = 0});
+/// The recruiter app frame: bottom tabs over a stateful shell.
+class RecruiterShell extends ConsumerWidget {
+  final StatefulNavigationShell shell;
+  const RecruiterShell({super.key, required this.shell});
+
   @override
-  ConsumerState<RecruiterShell> createState() => _RecruiterShellState();
+  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
+        body: shell,
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: shell.currentIndex,
+          onDestinationSelected: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.people_alt_outlined), selectedIcon: Icon(Icons.people_alt), label: 'Line'),
+            NavigationDestination(icon: Icon(Icons.format_list_numbered), label: 'Candidates'),
+            NavigationDestination(icon: Icon(Icons.badge_outlined), selectedIcon: Icon(Icons.badge), label: 'Cards'),
+            NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Me'),
+          ],
+        ),
+      );
 }
 
-class _RecruiterShellState extends ConsumerState<RecruiterShell> {
-  late int tab = widget.initialTab;
-
+/// One recruiter tab, built for whoever is signed in.
+class RecruiterTab extends ConsumerWidget {
+  final String mode; // line | list | cards | me
+  const RecruiterTab({super.key, required this.mode});
   @override
-  Widget build(BuildContext context) {
-    final a = widget.auth;
-    final pages = [
-      RecruiterPage(boothId: a.boothId, keyParam: a.key, mode: 'line'),
-      RecruiterPage(boothId: a.boothId, keyParam: a.key, mode: 'list'),
-      RecruiterCardsTab(auth: a),
-      _RecruiterMe(auth: a),
-    ];
-    return Scaffold(
-      body: IndexedStack(index: tab, children: pages),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: tab,
-        onDestinationSelected: (i) => setState(() => tab = i),
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.people_alt_outlined), selectedIcon: Icon(Icons.people_alt), label: 'Line'),
-          NavigationDestination(icon: Icon(Icons.format_list_numbered), label: 'Candidates'),
-          NavigationDestination(icon: Icon(Icons.badge_outlined), selectedIcon: Icon(Icons.badge), label: 'Cards'),
-          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Me'),
-        ],
-      ),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final a = ref.watch(recruiterProvider);
+    if (a == null) return const SizedBox();
+    return switch (mode) {
+      'line' || 'list' => RecruiterPage(key: ValueKey('${a.boothId}-$mode'), boothId: a.boothId, keyParam: a.key, mode: mode),
+      'cards' => RecruiterCardsTab(key: ValueKey('${a.boothId}-cards'), auth: a),
+      _ => _RecruiterMe(auth: a),
+    };
   }
 }
 

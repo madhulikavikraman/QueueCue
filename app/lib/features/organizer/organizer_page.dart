@@ -194,12 +194,56 @@ class _OrganizerPageState extends ConsumerState<OrganizerPage> {
               value: o['simulating'] == true,
               onChanged: (v) => _post('/api/organizer/simulate', {'on': v}),
             ),
+            OutlinedButton.icon(
+              onPressed: () => _post('/api/organizer/refresh-times'),
+              icon: const Icon(Icons.update),
+              label: const Text('Refresh demo times'),
+            ),
+            const Text('Moves the seeded demo data to "now" (waits, lines, timestamps). Real sign-ups are not touched.',
+                style: TextStyle(fontSize: T.tiny, color: T.muted)),
+          ]),
+        ),
+      ),
+      const SizedBox(height: T.s3),
+      Card(
+        color: T.dangerBg,
+        child: Padding(
+          padding: const EdgeInsets.all(T.s4),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            const Text('Danger zone', style: TextStyle(fontWeight: FontWeight.w800, color: T.danger)),
+            const Text('Reset deletes EVERY account, line, card swap and point, including real sign-ups, and restores the seed data.',
+                style: TextStyle(fontSize: T.small)),
+            const SizedBox(height: T.s2),
             OutlinedButton(
+              style: OutlinedButton.styleFrom(foregroundColor: T.danger, side: const BorderSide(color: T.danger, width: 1.5)),
               onPressed: () async {
-                final ok = await _confirmDialog(context, 'Reset demo?', 'Restores the seed: lines, conversations, drops, points. Demo students stay signed in.');
-                if (ok) await _post('/api/organizer/reset');
+                final c = TextEditingController();
+                final ok = await showDialog<bool>(
+                  context: context,
+                  builder: (d) => AlertDialog(
+                    title: const Text('Reset all data?'),
+                    content: Column(mainAxisSize: MainAxisSize.min, children: [
+                      const Text('Type RESET to confirm. This cannot be undone.'),
+                      const SizedBox(height: T.s3),
+                      TextField(controller: c, autofocus: true, decoration: const InputDecoration(hintText: 'RESET')),
+                    ]),
+                    actions: [
+                      TextButton(onPressed: () => Navigator.pop(d, false), child: const Text('Cancel')),
+                      FilledButton(
+                        style: FilledButton.styleFrom(backgroundColor: T.danger),
+                        onPressed: () => Navigator.pop(d, c.text.trim() == 'RESET'),
+                        child: const Text('Reset'),
+                      ),
+                    ],
+                  ),
+                );
+                if (ok == true) {
+                  await _post('/api/organizer/reset');
+                } else if (ok == false && c.text.isNotEmpty && context.mounted) {
+                  toast(context, 'Not reset: you need to type RESET exactly.');
+                }
               },
-              child: const Text('Reset demo'),
+              child: const Text('Reset demo data'),
             ),
           ]),
         ),
@@ -228,6 +272,27 @@ class _OrganizerPageState extends ConsumerState<OrganizerPage> {
           style: TextStyle(color: T.muted, fontSize: T.small)),
       const SizedBox(height: T.s3),
       if (reqs.isEmpty) const EmptyState(icon: Icons.accessibility_new, title: 'No requests'),
+      const SizedBox(height: T.s5),
+      const Text('Forgot password', style: TextStyle(fontWeight: FontWeight.w800, fontSize: T.h2)),
+      const Text('Sets a temporary password for a student or recruiter. Tell them in person; they can change it later.',
+          style: TextStyle(color: T.muted, fontSize: T.small)),
+      const SizedBox(height: T.s2),
+      _ResetPassword(onReset: (email) async {
+        try {
+          final r = await api.post('/api/organizer/reset-password?$q', {'email': email});
+          if (!context.mounted) return;
+          await showDialog(
+            context: context,
+            builder: (d) => AlertDialog(
+              title: const Text('Temporary password'),
+              content: SelectableText(r['message'] as String, style: const TextStyle(fontSize: T.h3)),
+              actions: [FilledButton(onPressed: () => Navigator.pop(d), child: const Text('Done'))],
+            ),
+          );
+        } on ApiException catch (e) {
+          if (context.mounted) toast(context, e.message);
+        }
+      }),
       for (final r in reqs)
         Card(
           child: ListTile(
@@ -476,4 +541,21 @@ class _AuditTab extends ConsumerWidget {
           ]);
         },
       );
+}
+
+class _ResetPassword extends StatefulWidget {
+  final Future<void> Function(String email) onReset;
+  const _ResetPassword({required this.onReset});
+  @override
+  State<_ResetPassword> createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<_ResetPassword> {
+  final email = TextEditingController();
+  @override
+  Widget build(BuildContext context) => Row(children: [
+        Expanded(child: TextField(controller: email, keyboardType: TextInputType.emailAddress, decoration: const InputDecoration(hintText: 'their email'))),
+        const SizedBox(width: T.s2),
+        FilledButton(onPressed: () => widget.onReset(email.text.trim()), child: const Text('Reset password')),
+      ]);
 }

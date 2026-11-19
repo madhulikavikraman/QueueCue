@@ -328,6 +328,49 @@ void main() {
     expect(st, 200);
   });
 
+  test('Not here removes only the top of the line; password reset; alerts', () async {
+    qq.db.exec("UPDATE fairs SET status='open'");
+    qq.db.exec("UPDATE booths SET status='open'");
+    final now = qq.clock();
+    for (final (i, sid) in ['sim-1', 'sim-2'].indexed) {
+      qq.db.exec("UPDATE queue_entries SET status='left' WHERE student_id=? AND status='waiting'", [sid]);
+      qq.db.insert('queue_entries', {'booth_id': 'stackline', 'student_id': sid, 'joined_at': now - (10 - i) * 60000, 'status': 'waiting'});
+    }
+    final w = qq.waiting('stackline');
+    expect(w.length, greaterThan(1));
+    final (bad, _) = await call('POST', '/api/recruiter/stackline/noshow?key=bk-stackline', body: {'student_id': w[1]['student_id']});
+    expect(bad, 409, reason: 'cannot skip past the top');
+    final (ok, _) = await call('POST', '/api/recruiter/stackline/noshow?key=bk-stackline', body: {'student_id': w[0]['student_id']});
+    expect(ok, 200);
+    expect(qq.waiting('stackline').first['student_id'], w[1]['student_id']);
+    final (r1, rp) = await call('POST', '/api/organizer/reset-password?org=org-test', body: {'email': 'percy.weasley@example.edu'});
+    expect(r1, 200);
+    final (r2, _) = await call('POST', '/api/students/login', body: {'email': 'percy.weasley@example.edu', 'password': rp['password']});
+    expect(r2, 200);
+    final (r3, al) = await call('GET', '/api/me/alerts', headers: {'x-student-token': 'demo-viktor'});
+    expect(r3, 200);
+    expect(al['exchange'], isNotNull);
+  });
+
+  test('Refresh demo times shifts demo data only, never into the future', () async {
+    final (_, s) = await call('POST', '/api/students', body: {'name': 'Real Person', 'email': 'real@example.edu', 'password': 'pw12', 'major': 'Computer Science', 'work_auth': 'citizen'});
+    final realId = s['id'];
+    final before = qq.db.scalar('SELECT created_at FROM students WHERE id=?', [realId]);
+    final simBefore = qq.db.scalar("SELECT created_at FROM students WHERE id='sim-1'") as int;
+    // Seeded "now"; the demo runs 5 hours later.
+    qq.db.setMeta('seeded_at', '${qq.clock() + 1000}');
+    final real = qq.clock;
+    final later = real() + 5 * 3600 * 1000;
+    qq.clock = () => later;
+    final (ok, _) = await call('POST', '/api/organizer/refresh-times?org=org-test');
+    expect(ok, 200);
+    expect(qq.db.scalar('SELECT created_at FROM students WHERE id=?', [realId]), before, reason: 'real accounts untouched');
+    expect(qq.db.scalar("SELECT created_at FROM students WHERE id='sim-1'") as int, greaterThan(simBefore));
+    final future = qq.db.scalar("SELECT COUNT(*) FROM exchanges WHERE created_at > ?", [qq.clock() + 1000]);
+    expect(future, 0, reason: 'nothing moved into the future');
+    qq.clock = real;
+  });
+
   test('Every cached pitch passes the deterministic critic', () {
     final cache = jsonDecode(File('assets/demo/ai_cache.json').readAsStringSync())['entries'] as Map<String, dynamic>;
     for (final e in cache.entries.where((e) => e.key.startsWith('pitch:'))) {

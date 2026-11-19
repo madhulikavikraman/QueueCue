@@ -8,7 +8,9 @@ At campus career fairs, popular booths have 2+ hour lines, students print many c
 
 ## What QueueCue does
 
+
 **Students (phone web app, installable to the home screen)**
+
 - **Fair plan**: every booth ranked by blind fit, with which resume to use and why, and flags for visa sponsorship, "hires my major" and US-citizens-only. No booth is hidden; low fits show the reason.
 - **Virtual lines**: scan the booth QR, join the line, see people ahead and a wait *range* ("~35 to 45 min") from that booth's real service times.
 - **Drop and go**: send the matched resume plus an optional 2-line note (AI can suggest one in your voice) straight to the recruiter's inbox.
@@ -46,14 +48,15 @@ No API keys, no cloud accounts, no billing. AI runs as background jobs with hone
 ## Setup (under 10 minutes on a fresh laptop)
 
 | Laptop RAM | Model (`server/config.json` → `"model"`) | Download |
-|---|---|---|
-| 8 GB | `qwen3:8b` (critic pass stays on) | ~5 GB |
-| 16 GB | `qwen3:14b` (default) | ~9 GB |
-| 24 GB+ | `gpt-oss:20b` | ~14 GB |
+| ---------- | --------------------------------------------- | -------- |
+| 8 GB       | `qwen3:8b` (critic pass stays on)           | ~5 GB    |
+| 16 GB      | `qwen3:14b` (default)                       | ~9 GB    |
+| 24 GB+     | `gpt-oss:20b`                               | ~14 GB   |
 
 The model name is a single config value. Demo Mode works without any model installed.
 
 ### macOS
+
 ```bash
 # 1. Flutter (includes Dart)
 brew install --cask flutter
@@ -72,6 +75,7 @@ brew install cloudflared
 ```
 
 ### Windows (PowerShell)
+
 ```powershell
 winget install --id Ollama.Ollama
 winget install --id Cloudflare.cloudflared
@@ -85,6 +89,7 @@ ollama pull qwen3:14b
 ```
 
 ### What `./run_demo.sh` does
+
 1. Checks Ollama (starts it if installed) and the model, and whisper.cpp.
 2. Builds the web app if the source changed (`flutter build web --no-web-resources-cdn`, so nothing loads from a CDN).
 3. Starts the server on :8080.
@@ -95,11 +100,13 @@ Flags: `--reset` (fresh seed), `--live` (live model on), `--cached`, `--lan` (sk
 **LAN-only fallback** (no internet at the venue): `./run_demo.sh --lan` prints `http://<laptop-ip>:8080`. Phones must be on the same Wi-Fi. iPhone Safari only allows the camera and microphone on HTTPS, so on LAN use the Demo Mode booth taps instead of scanning and type answers instead of recording. The recruiter laptop can still scan with its webcam because `localhost` counts as secure.
 
 ## Add QueueCue to an iPhone home screen
+
 1. Open the link in **Safari** (scan the terminal QR with the Camera app).
 2. Tap the **Share** button, then **Add to Home Screen**, then **Add**.
 3. Launch it from the "QueueCue" icon: it opens full screen like an app. Allow camera access the first time you scan.
 
 ## Demo Mode
+
 - Organizer → **Floor** tab: **Simulate crowd** (simulated students join lines and are served every few seconds; real students are never moved), **Reset demo**, and the **Live AI** toggle (off = cache, the default).
 - Seeded data: one fair, 12 fictional employers (big tech, AI startup, embedded/EE, finance, a defense company that requires US citizenship, and more), 110 simulated students, and 3 demo students with distinct resumes and voices:
   - **Viktor Krum**: international MS CS student, F-1. Casual, story-first.
@@ -110,26 +117,28 @@ Flags: `--reset` (fresh seed), `--live` (live model on), `--cached`, `--lan` (sk
 - Organizer: `/organizer?org=org-demo-key` (change `organizer_key` in `server/config.json` for a real fair).
 
 **The AI cache.** `server/assets/demo/ai_cache.json` ships as a hand-written starter for the 3 demo students, and the test suite checks every cached pitch against the critic rules. Before the demo, regenerate it from the live model so judges see real model output:
+
 ```bash
 cd server && dart run bin/build_cache.dart            # all demo students x all booths (slow)
 cd server && dart run bin/build_cache.dart northwind  # just one booth
 ```
+
 Anything not in the cache falls back to an offline draft built only from the student's own resume lines, labelled as such in the app.
 
 ## 90-second demo script
 
 **Before you start:** `./run_demo.sh --reset`. Projector shows the recruiter view for Northwind on the laptop (`/booth/northwind?key=bk-northwind`), organizer in a second tab. Phone A opens `/?student=demo-viktor`, Phone B opens `/?student=demo-hermione`.
 
-| # | Who | Do | Show |
-|---|---|---|---|
-| 1 | Phone A (Viktor) | Plan tab | Halcyon Systems at the bottom: **US citizens only**, **Does not sponsor visas**. Lumen Labs #1: **Use: AI/ML resume**. |
-| 2 | Phone A | Tap **Northwind Cloud**, **Join line** | **~35 to 45 min**, **13 ahead of you**. Pitch brief appears. Read it aloud. |
-| 3 | Phone B (Hermione) | Northwind, **More like me** | "140 pages a week, down to 53…": the same booth in a clearly different voice. |
-| 4 | Phone B | **Drop and go**, Production Eng resume (marked "Matched"), Send. Then **Join line**. | "Dropped at Booth 1. The recruiter can see it now." 14 ahead. |
-| 5 | Laptop (recruiter) | Look under **Sent their resume** | Hermione appeared live with the fit reason. Tap 5 stars. |
-| 6 | Laptop + Phone A | Phone A: **My card** tab. Laptop: **Scan student QR**, pick **Standout**, type a memory note | Cards swap, Phone A leaves the line, Phone B's estimate drops to 13 ahead. |
-| 7 | Phone A | **Rolodex**, **Record 15-second note**, then **Draft follow-up in my voice**, **Copy** | An email that sounds like Viktor, referencing what the recruiter said. |
-| 8 | Organizer | **Close fair** | Phone B: "Your resume reached 3 best-fit recruiters." **Fair Recap** with badges; **Me** tab shows the friends leaderboard. |
+| # | Who                | Do                                                                                                             | Show                                                                                                                                     |
+| - | ------------------ | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | Phone A (Viktor)   | Plan tab                                                                                                       | Halcyon Systems at the bottom: **US citizens only**, **Does not sponsor visas**. Lumen Labs #1: **Use: AI/ML resume**. |
+| 2 | Phone A            | Tap **Northwind Cloud**, **Join line**                                                             | **~35 to 45 min**, **13 ahead of you**. Pitch brief appears. Read it aloud.                                                  |
+| 3 | Phone B (Hermione) | Northwind, **More like me**                                                                              | "140 pages a week, down to 53…": the same booth in a clearly different voice.                                                           |
+| 4 | Phone B            | **Drop and go**, Production Eng resume (marked "Matched"), Send. Then **Join line**.               | "Dropped at Booth 1. The recruiter can see it now." 14 ahead.                                                                            |
+| 5 | Laptop (recruiter) | Look under **Sent their resume**                                                                         | Hermione appeared live with the fit reason. Tap 5 stars.                                                                                 |
+| 6 | Laptop + Phone A   | Phone A: **My card** tab. Laptop: **Scan student QR**, pick **Standout**, type a memory note | Cards swap, Phone A leaves the line, Phone B's estimate drops to 13 ahead.                                                               |
+| 7 | Phone A            | **Rolodex**, **Record 15-second note**, then **Draft follow-up in my voice**, **Copy** | An email that sounds like Viktor, referencing what the recruiter said.                                                                   |
+| 8 | Organizer          | **Close fair**                                                                                           | Phone B: "Your resume reached 3 best-fit recruiters." **Fair Recap** with badges; **Me** tab shows the friends leaderboard.  |
 
 Without whisper.cpp installed, step 7 uses the cached demo transcript; with it installed the recording is transcribed on the laptop.
 
@@ -146,6 +155,7 @@ Without whisper.cpp installed, step 7 uses the cached demo transcript; with it i
 - **Post-fair audit** (organizer): correlation between arrival time and rank within each section (should be near zero), average rank by arrival hour, Fair Play delivery by major and by work authorization with a four-fifths flag, revealed seed, CSV export.
 
 ### Proof: invariance tests (`cd server && dart test`)
+
 ```
 $ dart test
   ✓ Invariance: identity, arrival time, points and level never change the order random changes to name, arrival time of day, points, level and grad year
@@ -175,6 +185,7 @@ $ dart test
 
 00:01 +24: All tests passed!
 ```
+
 The full output is in [docs/test_output.txt](docs/test_output.txt). The property tests run 300 random shortlists each: randomly changing name, arrival time, points, level and grad year never changes the order; every verified student sits above every non-verified one; changing only wait minutes reorders two students only when their fit gap is within the effort cap; a student token cannot confirm a conversation.
 
 ## AI layer
@@ -184,6 +195,7 @@ One `AiService` interface (`server/lib/ai/ai_service.dart`) with `OllamaAiServic
 All prompts and their JSON schemas: **[PROMPTS.md](PROMPTS.md)** (regenerate with `cd server && dart run bin/dump_prompts.dart`).
 
 ## Project structure
+
 ```
 app/                      Flutter (Dart 3, Riverpod, go_router)
   lib/core/design/        design tokens + theme (restyle = this folder)
@@ -205,9 +217,11 @@ PROMPTS.md                every prompt + JSON schema
 ```
 
 ## Routes
+
 `/` student app · `/join/:booth?t=…` booth QR target · `/b/:booth` booth screen · `/booth/:booth?key=…` recruiter view · `/recruiter` recruiter sign-in · `/organizer?org=…` organizer · `/recap` · `/fairplay` · `/why` · `/about`
 
 ## Troubleshooting
+
 - **Phone can't open the link**: on LAN, phone and laptop must share Wi-Fi and the laptop firewall must allow port 8080. Prefer the tunnel link.
 - **Camera or mic does nothing on iPhone**: you're on `http://`. Use the `https://…trycloudflare.com` link.
 - **QR scanner shows a camera but never reads codes**: the in-browser scanner (mobile_scanner) downloads its ZXing decoder from a public CDN the first time, so the scanning device needs internet. On LAN-only Wi-Fi, use the Demo Mode booth list on phones; for the recruiter, open the booth view once while online so the browser caches the decoder.

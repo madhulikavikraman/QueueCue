@@ -514,6 +514,7 @@ class Seeder {
       _used.add(n['number'] as int);
     }
     await _seedShowcase(f['starts_at'] as int, qq.clock(), personas);
+    db.setMeta('seeded_at', '${qq.clock()}');
     return true;
   }
 

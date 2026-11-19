@@ -51,6 +51,8 @@ class _StudentLoginPageState extends ConsumerState<StudentLoginPage> {
           FilledButton(onPressed: busy ? null : _login, child: const Text('Sign in')),
           const SizedBox(height: T.s2),
           TextButton(onPressed: () => context.go('/onboarding'), child: const Text('New here? Set up in 2 minutes')),
+          const Text('Forgot your password? The organizer help desk can give you a temporary one.',
+              style: TextStyle(color: T.muted, fontSize: T.small)),
           const SizedBox(height: T.s3),
           const Text('Demo students: viktor.krum@example.edu, hermione.granger@example.edu, percy.weasley@example.edu (password: hogwarts)',
               style: TextStyle(color: T.muted, fontSize: T.small)),

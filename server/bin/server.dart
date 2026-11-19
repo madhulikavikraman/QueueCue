@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+
+import 'package:queuecue_server/core/close_audit.dart';
 
 import 'package:queuecue_server/ai/ollama_ai_service.dart';
 import 'package:queuecue_server/app.dart';
@@ -34,6 +37,16 @@ QueueCue server on http://localhost:${server.port}
   whisper:   ${whisper ? 'ready' : 'not set up (typed answers still work)'}
   Organizer: http://localhost:${server.port}/organizer?org=${cfg.organizerKey}
 ''');
+  // Real fairs close themselves at the scheduled end (line credit + Fair Play).
+  // Off in Demo Mode so a demo never closes on its own.
+  Timer.periodic(const Duration(seconds: 60), (_) {
+    try {
+      final f = qq.fair();
+      if (!qq.demoMode && f['status'] == 'open' && qq.clock() >= (f['ends_at'] as int)) {
+        stdout.writeln(qq.closeFair()['message']);
+      }
+    } catch (_) {}
+  });
   ProcessSignal.sigint.watch().listen((_) async {
     await server.close(force: true);
     qq.db.raw.dispose();

@@ -46,6 +46,34 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   final password = TextEditingController();
   final interests = TextEditingController();
   final bio = TextEditingController();
+  int draftVersion = 0; // bumps when a saved draft is restored (rebuilds dropdowns)
+  static const _draftKey = 'qq_onboard_draft';
+
+  /// Unsent profile answers survive leaving the page (never the password).
+  Future<void> _saveDraft() => Prefs.set(_draftKey, jsonEncode({
+        'name': name.text, 'email': email.text, 'major': major, 'degree': degree, 'grad_year': gradYear,
+        'auth': auth, 'avatar': avatar, 'interests': interests.text, 'bio': bio.text,
+      }));
+
+  Future<void> _loadDraft() async {
+    final v = await Prefs.get(_draftKey);
+    if (v == null || v.isEmpty || !mounted) return;
+    try {
+      final d = jsonDecode(v) as Map<String, dynamic>;
+      setState(() {
+        name.text = d['name'] as String? ?? '';
+        email.text = d['email'] as String? ?? '';
+        major = d['major'] as String?;
+        degree = d['degree'] as String? ?? degree;
+        gradYear = (d['grad_year'] as num?)?.toInt() ?? gradYear;
+        auth = d['auth'] as String?;
+        avatar = d['avatar'] as String? ?? avatar;
+        interests.text = d['interests'] as String? ?? '';
+        bio.text = d['bio'] as String? ?? '';
+        draftVersion++;
+      });
+    } catch (_) {}
+  }
   String? major;
   String degree = 'BS';
   int gradYear = DateTime.now().year + 1;
@@ -71,6 +99,12 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   @override
   void initState() {
     super.initState();
+    if (ref.read(sessionProvider) == null) {
+      _loadDraft();
+      for (final c in [name, email, interests, bio]) {
+        c.addListener(_saveDraft);
+      }
+    }
     if (ref.read(sessionProvider) != null && step == 0) {
       step = 1;
       _resume();
@@ -126,6 +160,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         'bio': bio.text.trim(),
       });
       await ref.read(recruiterProvider.notifier).set(null);
+      await Prefs.set(_draftKey, '');
       await ref.read(sessionProvider.notifier).set(r['token'] as String);
       if (r['resumed'] == true) {
         if (mounted) toast(context, 'Welcome back. Picking up where you left off.');
@@ -283,29 +318,41 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         TextField(controller: name, decoration: const InputDecoration(labelText: S.nameLabel), textCapitalization: TextCapitalization.words),
         const SizedBox(height: T.s3),
         DropdownButtonFormField<String>(
+          key: ValueKey('major$draftVersion'),
           initialValue: major,
           isExpanded: true,
           decoration: const InputDecoration(labelText: S.majorLabel),
           items: [for (final m in majors) DropdownMenuItem(value: m, child: Text(m))],
-          onChanged: (v) => setState(() => major = v),
+          onChanged: (v) {
+            setState(() => major = v);
+            _saveDraft();
+          },
         ),
         const SizedBox(height: T.s3),
         Row(children: [
           Expanded(
             child: DropdownButtonFormField<String>(
+              key: ValueKey('degree$draftVersion'),
               initialValue: degree,
               decoration: const InputDecoration(labelText: S.degreeLabel),
               items: [for (final d in ['BS', 'BA', 'MS', 'MBA', 'PhD']) DropdownMenuItem(value: d, child: Text(d))],
-              onChanged: (v) => setState(() => degree = v ?? 'BS'),
+              onChanged: (v) {
+                setState(() => degree = v ?? 'BS');
+                _saveDraft();
+              },
             ),
           ),
           const SizedBox(width: T.s3),
           Expanded(
             child: DropdownButtonFormField<int>(
+              key: ValueKey('year$draftVersion'),
               initialValue: gradYear,
               decoration: const InputDecoration(labelText: S.gradYearLabel),
               items: [for (var y = DateTime.now().year; y <= DateTime.now().year + 5; y++) DropdownMenuItem(value: y, child: Text('$y'))],
-              onChanged: (v) => setState(() => gradYear = v ?? gradYear),
+              onChanged: (v) {
+                setState(() => gradYear = v ?? gradYear);
+                _saveDraft();
+              },
             ),
           ),
         ]),
@@ -325,7 +372,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         SectionTitle(S.workAuthLabel, sub: S.workAuthWhy),
         RadioGroup<String>(
           groupValue: auth,
-          onChanged: (v) => setState(() => auth = v),
+          onChanged: (v) {
+            setState(() => auth = v);
+            _saveDraft();
+          },
           child: Column(children: [
             for (final e in S.workAuth.entries)
               RadioListTile<String>(value: e.key, title: Text(e.value), contentPadding: EdgeInsets.zero),
@@ -335,7 +385,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
         Wrap(spacing: T.s2, runSpacing: T.s2, children: [
           for (final a in avatarNames)
             InkWell(
-              onTap: () => setState(() => avatar = a),
+              onTap: () {
+                setState(() => avatar = a);
+                _saveDraft();
+              },
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 padding: const EdgeInsets.all(3),

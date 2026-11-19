@@ -9,6 +9,7 @@ import 'ai/cached_ai_service.dart';
 import 'ai/ollama_ai_service.dart';
 import 'ai/transcribe.dart';
 import 'config.dart';
+import 'core/close_audit.dart';
 import 'core/hub.dart';
 import 'core/qq.dart';
 import 'db/db.dart';
@@ -57,6 +58,12 @@ Future<QQ> buildQQ(Config cfg, {String? dbPath, int Function()? clock, bool seed
     await Seeder(qq).run();
   }
   _shortenCardNumbers(qq);
+  // Demo data seeded hours ago looks stale (people "waiting" all night).
+  final seededAt = int.tryParse(qq.db.meta('seeded_at') ?? '');
+  if (qq.demoMode && seededAt != null && qq.clock() - seededAt > 3 * 3600 * 1000 && qq.db.one('SELECT 1 FROM fairs') != null) {
+    final d = qq.refreshDemoTimes();
+    stdout.writeln('Demo times moved forward ${(d / 60000).round()} min.');
+  }
   if (qq.demoMode && await Seeder(qq).addShowcaseIfMissing()) stdout.writeln('Added the 10 showcase students.');
   // The project folder can move; re-point stored PDF paths at this uploads folder.
   final up = cfg.resolve(cfg.uploadsDir);

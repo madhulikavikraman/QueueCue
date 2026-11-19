@@ -85,7 +85,7 @@ Router buildApi(QQ qq) {
         for (final b in qq.booths())
           {'id': b['id'], 'name': b['name'], 'number': b['number'], 'key': b['booth_key'], 'recruiter': b['recruiter_name']}
       ],
-      'organizer_key': qq.cfg.organizerKey,
+      'organizer_key': isLocalRequest(req) ? qq.cfg.organizerKey : null,
     });
   });
 
@@ -539,6 +539,22 @@ Router buildApi(QQ qq) {
     });
   });
 
+  /// What just happened to me: latest card swap and my line position.
+  r.get('/api/me/alerts', (Request req) {
+    final s = requireStudent(qq, req);
+    final sid = s['id'] as String;
+    final ex = db.one('SELECT id, booth_id, created_at FROM exchanges WHERE student_id=? ORDER BY id DESC LIMIT 1', [sid]);
+    final q = db.one("SELECT booth_id FROM queue_entries WHERE student_id=? AND status='waiting'", [sid]);
+    final friend = db.one("SELECT id, to_student FROM card_requests WHERE kind='friend' AND from_student=? AND status='accepted' ORDER BY resolved_at DESC LIMIT 1", [sid]);
+    return jsonOk({
+      'exchange': ex == null ? null : {'id': ex['id'], ...qq.recruiterCard(qq.booth(ex['booth_id'] as String))},
+      'friend': friend == null ? null : {'id': friend['id'], 'name': qq.student(friend['to_student'] as String)['name']},
+      'line': q == null
+          ? null
+          : {'booth_id': q['booth_id'], 'name': qq.booth(q['booth_id'] as String)['name'], ...qq.lineState(q['booth_id'] as String, sid)},
+    });
+  });
+
   // ---- business cards by number (no QR)
   r.get('/api/me/cards', (Request req) => jsonOk(qq.cardBook(requireStudent(qq, req)['id'] as String)));
   r.post('/api/me/cards/request', (Request req) async {
@@ -748,6 +764,19 @@ Router buildApi(QQ qq) {
         memory: (j['memory'] as String?)?.trim().isEmpty == true ? null : j['memory'] as String?));
   });
 
+  /// "Not here": the person at the top of the line did not show up.
+  r.post('/api/recruiter/<bid>/noshow', (Request req, String bid) async {
+    qq.boothByKey(bid, boothKey(req));
+    final j = await readJson(req);
+    final w = qq.waiting(bid);
+    if (w.isEmpty || w.first['student_id'] != j['student_id']) {
+      throw ApiError(409, 'Only the person at the top of the line can be marked as not here.');
+    }
+    final name = qq.student(j['student_id'] as String)['name'];
+    qq.leave(j['student_id'] as String, bid);
+    return jsonOk({'message': '$name removed from your line. Next person is up.'});
+  });
+
   r.post('/api/recruiter/<bid>/mark/<sid>', (Request req, String bid, String sid) async {
     qq.boothByKey(bid, boothKey(req));
     final j = await readJson(req);
@@ -911,6 +940,7 @@ Router buildApi(QQ qq) {
 
   r.post('/api/organizer/settings', (Request req) async {
     qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
     final j = await readJson(req);
     qq.updateSettings(wFit: numOrNull(j['w_fit']), wEffort: numOrNull(j['w_effort']), capMin: (j['cap_min'] as num?)?.toInt());
     if (j['ai_live'] != null) {
@@ -925,11 +955,13 @@ Router buildApi(QQ qq) {
 
   r.post('/api/organizer/close', (Request req) {
     qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
     return jsonOk(qq.closeFair());
   });
 
   r.post('/api/organizer/simulate', (Request req) async {
     qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
     final j = await readJson(req);
     if (j['on'] == true) {
       qq.startSimulation();
@@ -941,9 +973,17 @@ Router buildApi(QQ qq) {
 
   r.post('/api/organizer/reset', (Request req) async {
     qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
     await qq.jobs.drain();
     await Seeder(qq).run();
     return jsonOk({'ok': true, 'message': 'Demo reset to seed.'});
+  });
+
+  r.post('/api/organizer/refresh-times', (Request req) {
+    qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
+    final d = qq.refreshDemoTimes();
+    return jsonOk({'message': 'Demo times moved forward ${(d / 60000).round()} min. Everything else unchanged.'});
   });
 
   r.get('/api/organizer/audit', (Request req) {
@@ -972,6 +1012,24 @@ Router buildApi(QQ qq) {
     qq.requireOrganizer(orgKey(req));
     final j = await readJson(req);
     return jsonOk(qq.confirm(j['booth_id'] as String, studentId: j['student_id'] as String?, confirmedBy: 'staff'));
+  });
+
+  /// Forgot password: the organizer desk sets a temporary one.
+  r.post('/api/organizer/reset-password', (Request req) async {
+    qq.requireOrganizer(orgKey(req));
+    if (!isLocalRequest(req)) throw ApiError(403, 'This action only works on the host laptop.');
+    final j = await readJson(req);
+    final email = (j['email'] as String? ?? '').trim().toLowerCase();
+    final s = db.one('SELECT id, name FROM students WHERE lower(email)=? AND is_sim=0', [email]);
+    final b = s == null ? db.one('SELECT id, recruiter_name AS name FROM booths WHERE lower(recruiter_email)=?', [email]) : null;
+    if (s == null && b == null) throw ApiError(404, 'No account uses $email.');
+    final temp = 'qq${1000 + qq.rnd.nextInt(9000)}';
+    if (s != null) {
+      db.exec('UPDATE students SET password_hash=? WHERE id=?', [hashPassword(temp), s['id']]);
+    } else {
+      db.exec('UPDATE booths SET recruiter_password=? WHERE id=?', [hashPassword(temp), b!['id']]);
+    }
+    return jsonOk({'message': 'Temporary password for ${(s ?? b)!['name']}: $temp', 'password': temp});
   });
 
   r.get('/api/organizer/students', (Request req) {

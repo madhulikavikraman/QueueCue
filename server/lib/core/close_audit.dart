@@ -358,6 +358,48 @@ extension CloseAudit on QQ {
     changed(['fair', 'organizer', for (final b in booths()) 'booth:${b['id']}']);
   }
 
+  /// Demo Mode: move the demo data's times forward so it looks live again.
+  /// Only seeded/demo students (and the fair's schedule) move, and only
+  /// records from before the last refresh, so nothing lands in the future.
+  /// Real sign-ups are never touched.
+  int refreshDemoTimes() {
+    final mark = int.tryParse(db.meta('seeded_at') ?? '') ?? clock();
+    final delta = clock() - mark;
+    if (delta <= 0) return 0;
+    const demo = "(SELECT id FROM students WHERE is_sim=1 OR token LIKE 'demo-%')";
+    const byStudent = {
+      'students': ('id', ['checked_in_at', 'created_at']),
+      'resumes': ('student_id', ['created_at']),
+      'voice_profiles': ('student_id', ['updated_at']),
+      'fits': ('student_id', ['updated_at']),
+      'queue_entries': ('student_id', ['joined_at', 'left_at']),
+      'drops': ('student_id', ['created_at']),
+      'exchanges': ('student_id', ['created_at']),
+      'recruiter_marks': ('student_id', ['updated_at']),
+      'pitches': ('student_id', ['updated_at']),
+      'rolodex': ('student_id', ['note_at', 'email_sent_at', 'created_at']),
+      'points': ('student_id', ['created_at', 'award_at']),
+      'badges': ('student_id', ['earned_at']),
+      'friends': ('student_id', ['created_at']),
+      'student_flags': ('student_id', ['created_at']),
+      'summaries': ('student_id', ['updated_at']),
+      'card_requests': ('from_student', ['created_at', 'resolved_at']),
+    };
+    db.tx(() {
+      db.exec('UPDATE fairs SET starts_at = starts_at + ?, ends_at = ends_at + ?', [delta, delta]);
+      db.exec('UPDATE booths SET last_confirm_at = last_confirm_at + ? WHERE last_confirm_at <= ?', [delta, mark]);
+      for (final e in byStudent.entries) {
+        final (key, cols) = e.value;
+        for (final c in cols) {
+          db.exec('UPDATE ${e.key} SET $c = $c + ? WHERE $c IS NOT NULL AND $c <= ? AND $key IN $demo', [delta, mark]);
+        }
+      }
+      db.setMeta('seeded_at', '${clock()}');
+    });
+    changed(['fair', 'organizer', for (final b in booths()) 'booth:${b['id']}']);
+    return delta;
+  }
+
   void resolveAccess(int id) {
     db.exec("UPDATE access_requests SET status='resolved', resolved_at=? WHERE id=?", [clock(), id]);
     changed(['organizer']);

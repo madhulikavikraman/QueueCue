@@ -9,6 +9,7 @@ import '../../core/widgets/common.dart';
 import '../../core/widgets/live_builder.dart';
 import '../onboarding/onboarding_page.dart';
 import 'access_dialog.dart';
+import '../plan/how_it_works.dart';
 
 /// game: true = Quests tab (level, side quests, badges, leaderboard).
 /// game: false = Me tab (profile, resumes, recap, Fair Play, help, sign out).
@@ -167,6 +168,7 @@ class MeTab extends ConsumerWidget {
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingPage(startStep: 1))),
                 ),
                 ListTile(leading: const Icon(Icons.accessibility_new), title: const Text(S.accessHelp), onTap: () => showAccessDialog(context, ref)),
+                ListTile(leading: const Icon(Icons.help_outline), title: const Text('How QueueCue works'), onTap: () => showHowItWorks(context)),
                 ListTile(leading: const Icon(Icons.info_outline), title: const Text(S.about), onTap: () => context.push('/about')),
                 ListTile(
                   leading: const Icon(Icons.logout),

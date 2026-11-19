@@ -181,6 +181,8 @@ class _RecruiterPageState extends ConsumerState<RecruiterPage> {
     }
   }
 
+  int get _activeFilters => pileFilter.length + (minFit > 0 ? 1 : 0) + (section.isNotEmpty ? 1 : 0);
+
   String _filterQuery({bool topRated = false}) {
     final p = <String>[q];
     if (topRated) {
@@ -217,6 +219,26 @@ class _RecruiterPageState extends ConsumerState<RecruiterPage> {
         final linePanel = _LinePanel(
           view: v,
           onMet: (sid) => _confirm(studentId: sid, view: v),
+          onNoShow: (sid, name) async {
+            final ok = await showDialog<bool>(
+              context: context,
+              builder: (c) => AlertDialog(
+                title: Text('$name is not here?'),
+                content: const Text('They leave your line (no line credit). The next person moves up.'),
+                actions: [
+                  TextButton(onPressed: () => Navigator.pop(c, false), child: const Text('Cancel')),
+                  FilledButton(onPressed: () => Navigator.pop(c, true), child: const Text('Remove from line')),
+                ],
+              ),
+            );
+            if (ok != true) return;
+            try {
+              final r = await api.post('/api/recruiter/${widget.boothId}/noshow?$q', {'student_id': sid});
+              if (context.mounted) toast(context, r['message'] as String);
+            } on ApiException catch (e) {
+              if (context.mounted) toast(context, e.message);
+            }
+          },
           onNumber: () => _byNumber(v),
           onRespond: (req, accept) => _respond(req, accept, v),
         );
@@ -338,7 +360,13 @@ class _RecruiterPageState extends ConsumerState<RecruiterPage> {
         ),
         FilterChip(label: const Text(S.blindReview), selected: blind, onSelected: (x) => setState(() => blind = x)),
       ]),
-      const SizedBox(height: T.s2),
+      ExpansionTile(
+        tilePadding: EdgeInsets.zero,
+        leading: const Icon(Icons.tune),
+        title: Text(_activeFilters == 0 ? 'Filters and export' : 'Filters and export ($_activeFilters on)'),
+        childrenPadding: const EdgeInsets.only(bottom: T.s2),
+        expandedAlignment: Alignment.centerLeft,
+        children: [
       Wrap(spacing: T.s2, runSpacing: T.s2, crossAxisAlignment: WrapCrossAlignment.center, children: [
         for (final p in piles)
           FilterChip(
@@ -374,7 +402,17 @@ class _RecruiterPageState extends ConsumerState<RecruiterPage> {
             onPressed: () => api.openUrl('/api/recruiter/${widget.boothId}/export.zip?${_filterQuery()}'),
             icon: const Icon(Icons.folder_zip_outlined),
             label: const Text('CSV + resume PDFs')),
+        if (_activeFilters > 0)
+          TextButton(
+              onPressed: () => setState(() {
+                    pileFilter = {};
+                    minFit = 0;
+                    section = '';
+                  }),
+              child: const Text('Clear filters')),
       ]),
+        ],
+      ),
       if (drift != null) ...[
         const SizedBox(height: T.s3),
         Banner2(text: drift['message'] as String, icon: Icons.trending_down, color: T.warning, bg: T.warningBg),
@@ -488,7 +526,8 @@ class _LinePanel extends StatelessWidget {
   final void Function(String studentId) onMet;
   final VoidCallback onNumber;
   final void Function(Json req, bool accept) onRespond;
-  const _LinePanel({required this.view, required this.onMet, required this.onNumber, required this.onRespond});
+  final void Function(String studentId, String name) onNoShow;
+  const _LinePanel({required this.view, required this.onMet, required this.onNumber, required this.onRespond, required this.onNoShow});
 
   @override
   Widget build(BuildContext context) {
@@ -556,11 +595,20 @@ class _LinePanel extends StatelessWidget {
                 ),
               ]),
               const SizedBox(height: T.s3),
-              FilledButton.icon(
-                onPressed: () => onMet((top['student'] as Json)['id'] as String),
-                icon: const Icon(Icons.handshake_outlined),
-                label: const Text(S.met),
-              ),
+              Row(children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: () => onMet((top['student'] as Json)['id'] as String),
+                    icon: const Icon(Icons.handshake_outlined),
+                    label: const Text(S.met),
+                  ),
+                ),
+                const SizedBox(width: T.s2),
+                OutlinedButton(
+                  onPressed: () => onNoShow((top['student'] as Json)['id'] as String, (top['student'] as Json)['name'] as String),
+                  child: const Text('Not here'),
+                ),
+              ]),
             ]),
           ),
         )

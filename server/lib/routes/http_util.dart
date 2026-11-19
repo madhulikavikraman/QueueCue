@@ -56,3 +56,15 @@ Middleware cors() => (inner) => (req) async {
     };
 
 double? numOrNull(Object? v) => v is num ? v.toDouble() : (v is String ? double.tryParse(v) : null);
+
+/// True only for requests made on the host laptop itself. Tunnel traffic
+/// also arrives from 127.0.0.1, so a Cloudflare header means "remote".
+bool isLocalRequest(Request r) {
+  if (r.headers.containsKey('cf-connecting-ip') || r.headers.containsKey('cf-ray') || r.headers.containsKey('x-forwarded-for')) return false;
+  final info = r.context['shelf.io.connection_info'];
+  try {
+    return (info as dynamic).remoteAddress.isLoopback as bool;
+  } catch (_) {
+    return true; // tests (no socket)
+  }
+}
